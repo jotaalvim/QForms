@@ -26,27 +26,27 @@ def list2form2(l:list)->str:
     fim = "<input type=submit value='done'/> </ul></form>"
 
     for dic in l:
-        id = dic['id'] # nome
-        t  = dic.get('t','str')  # tipo
-        op = dic.get('o')  # opçoes para um tipo
-        d  = dic.get('h','')  # descrição, helper
-        r  = dic.get('req',False)# required
+        id = dic['id'] # name
+        t  = dic.get('t','str') # types
+        op = dic.get('o') # options
+        d  = dic.get('h','') # description, helper
+        r  = dic.get('req',False) # required
 
         if t == 'str':
             h += f"<li> {id}: <input type='text' name='{id}' /> </li> <p>{d}</p>\n"
 
-        if t == 'radio':# seleciona um de varios butoes
+        if t == 'radio': # selects on of diferent buttons 
             h += f'<li>{id}: <br/>'
             for elem in op:
                 h += f"<input type='radio' name='{id}' value='{elem}'>  {elem}</input> <br/>"
             h += f'</li>  <p>{d}</p>\n'
 
-        if t == 'check':# seleciona varios butoes
+        if t == 'check':# checkbox buttons
             h += f'<li>{id}: <br/>'
             for elem in op:
                 h += f"<input type='checkbox' name='{id}' value='{elem}'>  {elem}</input> <br/>"
             h += f'</li> <p>{d}</p>\n'
-        # inserir ficheiros
+        # upload files
     return h + fim
 
 
