@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+
+from flask import Flask, render_template, request
+import sys,os,yaml
+
+fconf = sys.argv[1]
+conf = yaml.load(open(fconf).read())
+print(conf)
+
+app = Flask(__name__)
+
+
+@app.route('/quest',methods = ['GET','POST'])
+def quest():
+
+    if request.method == 'GET':
+        return list2form2 (conf)
+
+    #if request.method == 'POST':
+    #    return mostra_request (l,request.form)
+
+
+def list2form2(l:list)->str:
+    titulo = l.pop(0)
+    h = f"<h1>{titulo}</h1>\n<form method='post'> <ul>"
+    fim = "<input type=submit value='done'/> </ul></form>"
+
+    for dic in l:
+        id = dic['id'] # nome
+        t  = dic.get('t','str')  # tipo
+        op = dic.get('o')  # opçoes para um tipo
+        d  = dic.get('h','')  # descrição, helper
+        r  = dic.get('req',False)# required
+
+        if t == 'str':
+            h += f"<li> {id}: <input type='text' name='{id}' /> </li> <p>{d}</p>\n"
+
+        if t == 'radio':# seleciona um de varios butoes
+            h += f'<li>{id}: <br/>'
+            for elem in op:
+                h += f"<input type='radio' name='{id}' value='{elem}'>  {elem}</input> <br/>"
+            h += f'</li>  <p>{d}</p>\n'
+
+        if t == 'check':# seleciona varios butoes
+            h += f'<li>{id}: <br/>'
+            for elem in op:
+                h += f"<input type='checkbox' name='{id}' value='{elem}'>  {elem}</input> <br/>"
+            h += f'</li> <p>{d}</p>\n'
+        # inserir ficheiros
+    return h + fim
+
+
+#if __name__ == '__main__':
+app.run()

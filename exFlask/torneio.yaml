@@ -1,0 +1,13 @@
+- titulo
+
+- id: nome
+  t: str 
+  h: descriçao nome completo
+  
+- id: sexo
+  t: radio
+  o: 
+     - masculino
+     - femenino
+  h: atençao abcdefghijklmnopqrstuvwxy
+  req: True 
