@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from flask import Flask, render_template, request
+from flask_ngrok import run_with_ngrok
 import sys,os,yaml,json
 
 fconf = sys.argv[1]
@@ -8,7 +9,7 @@ conf = yaml.load( open(fconf).read() )
 #print(conf)
 
 app = Flask(__name__)
-
+run_with_ngrok(app)
 
 @app.route('/quest',methods = ['GET','POST'])
 def quest():
@@ -54,24 +55,25 @@ def list2form2(l:list)->str:
 def mostra_request2(l:list,d:list)->str:
     
     
-    print("\n\n")
-    print(l)
-    print("\n\n")
-    print(d)
-    print("\n\n")
-    print("\n\n")
     k = fomrs2dict(d)
+    #colocar em ficheiro
+    print('\n\n')
     print(json.dumps(k))
-    print("\n\n")
+
+    f = open('lixo', 'a')
+    f.write(json.dumps(k))
+    f.write('\n')
+    f.close()
+    
+
+    print('\n\n')
 
     titulo,*l2 = l
 
     h   = f'<h1>recebido : {titulo} </h1> <ul>'
     fim = '</ul>'
 
-
     for dic in l2:
-
         id = dic['id'] # name
         t  = dic.get('t','str') # types
 
