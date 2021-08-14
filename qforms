@@ -11,8 +11,8 @@ app = Flask(__name__)
 #FIXME
 #run_with_ngrok(app)
 
-#c=clfilter(opt="do:")
-#print(c)
+c = jjcli.clfilter(opt="cjh")
+print(c)
 
 @app.route('/quest',methods = ['GET','POST'])
 def quest():
@@ -105,19 +105,34 @@ def mostra_request(l:list,d:list)->str:
 #forms to coma separated values
 def forms2csv(l:list,d:dict)->str:
     title,*l2 = l
-
     lId = listId(l) # list of identifiers
     acc = []
     for id in lId:
         lo = d.getlist(id)
-        if len(lo) == 0: #null
+        if not lo: #lo == []
             acc.append('')
         if len(lo) == 1: #one argument
-                
-            acc.append(lo[0])
+            acc.append(csv(lo[0]))
         if len(lo) > 1: # multiple answers
-            acc.append('"'+', '.join(lo)+'"')
+            acc.append(csv(', '.join(lo)))
     return ','.join(acc)
+
+#string to csv
+def csv (word:str)->str:
+    wordaux = ''
+    if '"' in word:
+        for l in word:
+            if l == '"':
+                wordaux += '"'+ '"'
+            else:
+                wordaux += l
+    if wordaux: # wordaux != null
+        wordcsv = wordaux
+    else:
+        wordcsv = word
+    if ',' in wordcsv or '"' in wordcsv:
+        wordcsv = '"'+wordcsv+'"'
+    return wordcsv
 
 #convert a form to a dict
 def forms2dict(l:list)->dict:
