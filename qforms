@@ -1,18 +1,18 @@
 #!/usr/bin/python3
-
 from flask import Flask, render_template, request
 from flask_ngrok import run_with_ngrok
 import sys, os, yaml, json, jjcli
 
+
 fconf = sys.argv[1]
+c = jjcli.clfilter(opt="ncjh")
+
 conf = yaml.load( open(fconf).read() )
 
 app = Flask(__name__)
-#FIXME
-#run_with_ngrok(app)
+if "-n" in c.opt:
+    run_with_ngrok(app)
 
-c = jjcli.clfilter(opt="cjh")
-print(c)
 
 @app.route('/quest',methods = ['GET','POST'])
 def quest():
@@ -70,18 +70,34 @@ def form2file(l:list,d:list)->str:
     
     lId = listId(l) # list of dentifiers 
 
-    # csv
-    if os.path.exists(path+name+'.csv'):
-        f = open(path+name+'.csv','a')
-        f.write(fcsv)
-        f.write('\n')
-        f.close()
-    else:
-        f = open(path+name+'.csv','a')
-        f.write(','.join(lId)+'\n')
-        f.write(fcsv)
-        f.write('\n')
-        f.close()
+    # exporting for csv
+    if '-c' in c.opt:
+        if os.path.exists(path+name+'.csv'):
+            f = open(path+name+'.csv','a')
+            f.write(fcsv)
+            f.write('\n')
+            f.close()
+        else:
+            f = open(path+name+'.csv','a')
+            f.write(','.join(lId)+'\n')
+            f.write(fcsv)
+            f.write('\n')
+            f.close()
+    #exporting for json
+    if '-j' in c.opt:
+        print('\n\n\n hello \n\n\n')
+        if os.path.exists(path+name+'.json'):
+            f = open(path+name+'.json','a')
+            f.write(json.dumps(fdict))
+            f.write('\n')
+            f.close()
+        else:
+            f = open(path+name+'.json','a')
+            #FIXME tilulo?
+            #f.write(','.join(lId)+'\n')
+            f.write(json.dumps(fdict))
+            f.write('\n')
+            f.close()
     #json.dumps(k) to tranforms a dict insto json
 
 
