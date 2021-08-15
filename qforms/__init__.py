@@ -85,9 +85,9 @@ def list2form(l:list)->str:
     
 #takes a form and a list os dicts(from yaml) and stores it in json, csv files
 def form2file(l:list,d:list)->str:
+    global fconf
     fdict = forms2dict(d)
     fcsv  = forms2csv(l,d)
-
     title,*l2 = l
     #path to yamell: fconf
     #extracting the file name and path from fconf (first argument)
@@ -100,20 +100,21 @@ def form2file(l:list,d:list)->str:
         path = ''
     
     lId = listId(l) # list of dentifiers 
-
     # exporting to csv
     if '-c' in c.opt:
+        exist = os.path.exists(path+name+'.csv')
         f = open(path+name+'.csv','a')
-        if not os.path.exists(path+name+'.csv'):
+        if not exist:
             f.write(f'{title}\n')
             f.write(','.join(lId)+'\n')
         f.write(fcsv+'\n')
         f.close()
     #exporting to json
     if '-j' in c.opt:
+        exist = os.path.exists(path+name+'.json')
         f = open(path+name+'.json','a')
-        if not os.path.exists(path+name+'.json'):
-            f.write(f'{{"title":"{title}"}}')
+        if not exist:
+            f.write(f'{{"title":"{title}"}}\n')
         f.write(json.dumps(fdict)+'\n')
         f.close()
 
