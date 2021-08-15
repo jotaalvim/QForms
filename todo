@@ -4,10 +4,10 @@ funçao de avaliação/resposta
 
 upload de ficheiros
 
+por utf8 no json
 
 
-
-meio feito:
+feito:
     -c em csv
     -j para gravar aem json 
     ngrok como opção

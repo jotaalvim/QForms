@@ -4,14 +4,28 @@ from flask_ngrok import run_with_ngrok
 import sys, os, yaml, json, jjcli
 
 
-fconf = sys.argv[1]
 c = jjcli.clfilter(opt="ncjh")
+
+if '-h' in c.opt:
+    print(
+    """Usage: qforms [options] config.yaml   
+    Options: 
+        -j : export to <title>.json
+        -c : export to <title>.csv
+        -h : this help
+    """)
+    sys.exit(0)
+
+
+fconf = c.args[0]
 
 conf = yaml.load( open(fconf).read() )
 
 app = Flask(__name__)
-if "-n" in c.opt:
+
+if '-n' in c.opt:
     run_with_ngrok(app)
+
 
 
 @app.route('/quest',methods = ['GET','POST'])
@@ -49,7 +63,6 @@ def list2form(l:list)->str:
             for elem in op:
                 h += f"<input type='checkbox' name='{id}' value='{elem}' >  {elem}</input> <br/>"
             h += f'</li> <p>{d}</p>\n'
-        # upload files
     return h + fim
 
     
@@ -58,6 +71,7 @@ def form2file(l:list,d:list)->str:
     fdict = forms2dict(d)
     fcsv  = forms2csv(l,d)
 
+    title,*l2 = l
     #path to yamell: fconf
     #extracting the file name and path from fconf (first argument)
     lp = fconf.split(sep='/') #list with the path
@@ -70,35 +84,21 @@ def form2file(l:list,d:list)->str:
     
     lId = listId(l) # list of dentifiers 
 
-    # exporting for csv
+    # exporting to csv
     if '-c' in c.opt:
-        if os.path.exists(path+name+'.csv'):
-            f = open(path+name+'.csv','a')
-            f.write(fcsv)
-            f.write('\n')
-            f.close()
-        else:
-            f = open(path+name+'.csv','a')
+        f = open(path+name+'.csv','a')
+        if not os.path.exists(path+name+'.csv'):
+            f.write(f'{title}\n')
             f.write(','.join(lId)+'\n')
-            f.write(fcsv)
-            f.write('\n')
-            f.close()
-    #exporting for json
+        f.write(fcsv+'\n')
+        f.close()
+    #exporting to json
     if '-j' in c.opt:
-        print('\n\n\n hello \n\n\n')
-        if os.path.exists(path+name+'.json'):
-            f = open(path+name+'.json','a')
-            f.write(json.dumps(fdict))
-            f.write('\n')
-            f.close()
-        else:
-            f = open(path+name+'.json','a')
-            #FIXME tilulo?
-            #f.write(','.join(lId)+'\n')
-            f.write(json.dumps(fdict))
-            f.write('\n')
-            f.close()
-    #json.dumps(k) to tranforms a dict insto json
+        f = open(path+name+'.json','a')
+        if not os.path.exists(path+name+'.json'):
+            f.write(f'{{"title":"{title}"}}')
+        f.write(json.dumps(fdict)+'\n')
+        f.close()
 
 
 #making the "recieved" html for the POST method
