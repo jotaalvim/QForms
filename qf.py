@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 from flask import Flask, render_template, request
 from flask_ngrok import run_with_ngrok
-import sys, os, yaml, json, jjcli
+import sys, os, yaml, json, jjcli, waitress
 
 
-c = jjcli.clfilter(opt="ncjh")
+c = jjcli.clfilter(opt="d:cjh")
 
 if '-h' in c.opt:
     print(
@@ -12,6 +12,7 @@ if '-h' in c.opt:
     Options: 
         -j : export to <title>.json
         -c : export to <title>.csv
+        -d <domain> : server host = domain (def: localhost) 
         -h : this help
     """)
     sys.exit(0)
@@ -23,8 +24,8 @@ conf = yaml.load( open(fconf).read() )
 
 app = Flask(__name__)
 
-if '-n' in c.opt:
-    run_with_ngrok(app)
+#if '-n' in c.opt:
+#    run_with_ngrok(app)
 
 
 
@@ -169,7 +170,12 @@ def listId(l:list)->list:
     return lacc
 
 if __name__ == '__main__':
-    app.run()
+    if "-d" in c.opt:
+        waitress.serve(app, host=c.opt["-d"], port=8080)
+    else:
+        waitress.serve(app, host="localhost", port=8080)
+    #app.run()
+
 
 # yaml.load ↓
 #['Torneio de xadrez viii edição Braga', {'id': 'nome', 't': 'str', 'h': 'descriçao nome completo', 'req': True}, {'id': 'sexo', 't': 'radio', 'o': ['masculino', 'feminino'], 'h': 'atençao abcdefghijklmnopqrstuvwxy', 'req': True}, {'id': 'checkbox', 't': 'check', 'o': ['vaca', 'gato', 'crocodilo', 'bicho pau']}]
