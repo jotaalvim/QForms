@@ -10,9 +10,10 @@ app = Flask(__name__)
 conf={}
 __version__ = "0.3"
 c = None
+fconf = None
 
 def main():
-    global c,conf
+    global c,conf, fconf
     c = jjcli.clfilter(opt="d:cjh")
 
     if '-h' in c.opt:
