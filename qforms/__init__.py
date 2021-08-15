@@ -4,7 +4,7 @@ Qforms: google-forms like local form generator tool
 #!/usr/bin/python3
 
 from flask import Flask, render_template, request
-from flask_ngrok import run_with_ngrok
+#from flask_ngrok import run_with_ngrok
 import sys, os, yaml, json, jjcli, waitress
 app = Flask(__name__)
 conf={}
