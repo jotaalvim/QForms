@@ -6,6 +6,13 @@ upload de ficheiros
 
 por utf8 no json
 
+-s esqueleto ou exemplo da configuração
+
+chave de apagar por exemplo numero de aluno repetido
+
+md5→  id.md5.extençao
+-h para guardar ficheiros com data e hora
+
 
 feito:
     -c em csv

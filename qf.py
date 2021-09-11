@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from flask import Flask, render_template, request
 from flask_ngrok import run_with_ngrok
-import sys, os, yaml, json, jjcli, waitress
+import sys, os, yaml, json, jjcli, waitress, hashlib
 
 
 c = jjcli.clfilter(opt="d:cjh")
@@ -17,12 +17,16 @@ if '-h' in c.opt:
     """)
     sys.exit(0)
 
-
+#yaml path
 fconf = c.args[0]
+UPLOAD_FOLDER = '.'
 
-conf = yaml.load( open(fconf).read() )
+conf = yaml.load( open(fconf).read(), Loader=yaml.FullLoader)
 
 app = Flask(__name__)
+
+#ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif' }
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #if '-n' in c.opt:
 #    run_with_ngrok(app)
@@ -36,44 +40,83 @@ def quest():
 
     if request.method == 'POST':
         form2file(conf, request.form)
+        upload_file(request.files)
         return mostra_request (conf, request.form)
 
 
 def list2form(l:list)->str:
     title,*l2 = l
-    h = f"<h1>{title}</h1>\n<form method='post'> <ul>"
+    h = f"<h1>{title}</h1>\n<form method='post' enctype='multipart/form-data'> <ul>"
     fim = "<input type=submit value='done'/> </ul></form>"
 
     for dic in l2:
-        id = dic['id'] # name
-        t  = dic.get('t','str') # types
-        op = dic.get('o') # options
-        d  = dic.get('h','') # description, helper
+        id = dic['id']            # name
+        t  = dic.get('t','str')   # types
+        op = dic.get('o')         # options
+        d  = dic.get('h','')      # description, helper
         r  = dic.get('req',False) # required
         req = 'required' if r else ''
 
+        # text box
         if t == 'str':
             h += f"<li> {id}: <input type='text' name='{id}' {req} /> </li> <p>{d}</p>\n"
-        if t == 'radio': # selects on of diferent buttons 
+        # selects one of diferent buttons 
+        if t == 'radio': 
             h += f'<li>{id}: <br/>'
             for elem in op:
                 h += f"<input type='radio' name='{id}' value='{elem}' {req} >  {elem}</input> <br/>"
             h += f'</li>  <p>{d}</p>\n'
-        if t == 'check':# checkbox buttons
+        # checkbox buttons
+        if t == 'check':
             h += f'<li>{id}: <br/>'
             for elem in op:
-                h += f"<input type='checkbox' name='{id}' value='{elem}' >  {elem}</input> <br/>"
+                h += f"<input type='checkbox' name='{id}' value='{elem}'>  {elem}</input> <br/>"
             h += f'</li> <p>{d}</p>\n'
+       # submit files
+        if t == 'file':
+            h += f"<input type='file' name ='{id}'>\n"
+
     return h + fim
 
-    
+
+
+
+
+def upload_file(d:dict):
+    # d is a multidict(request.files)
+    for key in d: 
+        if d[key]: #d[key] != "" houve submissao de ficheiro
+            f = d[key] #name
+            c = f.read()
+            
+            oldname = f.filename
+
+            l = oldname.split(sep='.')
+            if l: # l!=[]
+                ext = '.'+l[-1]
+            else:
+                ext = ''
+            
+            # calculating the file md5 
+            newname = hashlib.md5(c).hexdigest()
+
+            idnt = key
+            #adding extension and identification
+            finalname = idnt + newname + ext
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], finalname)) 
+            print('teste')
+            
+            #f.save(os.path.join(app.config['UPLOAD_FOLDER'], newname)) 
+
+
 #takes a form and a list os dicts(from yaml) and stores it in json, csv files
-def form2file(l:list,d:list)->str:
+def form2file(l:list,d:dict)->str:
     fdict = forms2dict(d)
     fcsv  = forms2csv(l,d)
-
+ 
     title,*l2 = l
     #path to yamell: fconf
+ 
     #extracting the file name and path from fconf (first argument)
     lp = fconf.split(sep='/') #list with the path
     if len(lp) > 1:
@@ -85,7 +128,7 @@ def form2file(l:list,d:list)->str:
     
     lId = listId(l) # list of dentifiers 
 
-    # exporting to csv
+    # saving to csv
     if '-c' in c.opt:
         f = open(path+name+'.csv','a')
         if not os.path.exists(path+name+'.csv'):
@@ -93,7 +136,7 @@ def form2file(l:list,d:list)->str:
             f.write(','.join(lId)+'\n')
         f.write(fcsv+'\n')
         f.close()
-    #exporting to json
+    # saving to json
     if '-j' in c.opt:
         f = open(path+name+'.json','a')
         if not os.path.exists(path+name+'.json'):
@@ -102,8 +145,16 @@ def form2file(l:list,d:list)->str:
         f.close()
 
 
-#making the "recieved" html for the POST method
-def mostra_request(l:list,d:list)->str:
+#"recieved" html for the POST method
+def mostra_request(l:list,d:dict)->str:
+    # l is the yaml conf
+    # d is the multidict (request.form)
+    print('\n')
+    print(request.form)
+    print('\n')
+    print(request.files)
+    print('\n')
+
     title,*l2 = l
     h   = f'<h1> Received : {title} </h1> <ul>'
     fim = '</ul>'
@@ -116,11 +167,13 @@ def mostra_request(l:list,d:list)->str:
             h += str.join(', ',d.getlist(id))
             h += '</li>'
         else:
-            h += f"<li> {id}: {d[id]} </li>\n"
+            h += f"<li> {id}: {d.get(id,'ignored')} </li>\n"
     return h + fim
 
-#forms to coma separated values
+#forms(multidict) to coma separated values
 def forms2csv(l:list,d:dict)->str:
+    # l is the yaml conf
+    # d is the multidict
     title,*l2 = l
     lId = listId(l) # list of identifiers
     acc = []
@@ -151,8 +204,8 @@ def csv (word:str)->str:
         wordcsv = '"'+wordcsv+'"'
     return wordcsv
 
-#convert a form to a dict
-def forms2dict(l:list)->dict:
+#convert a form (multidict) to a normal dict
+def forms2dict(l:dict)->dict:
     acc = {}
     for id in l:
         lo = l.getlist(id)
@@ -162,9 +215,10 @@ def forms2dict(l:list)->dict:
             acc[id] = lo
     return acc
     
-def listId(l:list)->list:
+#returns a list of identifiers from the yaml config
+def listId(l:list)->list: 
     title,*l2 = l
-    lacc = [] # list of identifiers
+    lacc = [] 
     for dic in l2:
         lacc.append(dic['id'])
     return lacc
@@ -179,7 +233,9 @@ if __name__ == '__main__':
 
 # yaml.load ↓
 #['Torneio de xadrez viii edição Braga', {'id': 'nome', 't': 'str', 'h': 'descriçao nome completo', 'req': True}, {'id': 'sexo', 't': 'radio', 'o': ['masculino', 'feminino'], 'h': 'atençao abcdefghijklmnopqrstuvwxy', 'req': True}, {'id': 'checkbox', 't': 'check', 'o': ['vaca', 'gato', 'crocodilo', 'bicho pau']}]
-# form request
+
+# request form 
 #ImmutableMultiDict([('nome', 'joao afonsoa alvim oliveida dias de almeida'), ('sexo', 'masculino'), ('checkbox', 'vaca'), ('checkbox', 'gato'), ('checkbox', 'crocodilo'), ('checkbox', 'bicho pau')])
+
 #json dumps
 #{"nome": "joao afonsoa alvim oliveida dias de almeida", "sexo": "masculino", "checkbox": "vaca"}
