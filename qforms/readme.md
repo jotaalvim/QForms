@@ -5,9 +5,9 @@ qforms - a quick local google-forms-like generator
 ## Synopsis
 
 ```
- qforms conf.yaml   -- starts a server; in the end generates a conf_out.json output
- qforms -h          -- show this help                     (FIXME(not yet))
- qforms -c          -- shown a configurarion file example (FIXME(not yet))
+qforms conf.yaml   -- starts a server; in the end generates a conf_out.json output
+qforms -h          -- show this help                     (FIXME(not yet))
+qforms -c          -- shown a configurarion file example (FIXME(not yet))
 ```
 
 ## Description
