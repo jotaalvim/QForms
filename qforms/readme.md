@@ -1,10 +1,12 @@
-qforms - quick google forms maker
+## Name
+
+qforms - a quick local google-forms-like generator
 
 ## Synopsis
 
- qforms conf.yaml   -- in the end generates a conf_out.json output
- qforms -h          -- show this help
- qforms -c          -- shown a econfigurarion file example
+ qforms conf.yaml   -- starts a server; in the end generates a conf_out.json output
+ qforms -h          -- show this help                     (FIXME(not yet))
+ qforms -c          -- shown a configurarion file example (FIXME(not yet))
 
 ## Description
 
@@ -27,9 +29,9 @@ field : f_str | f_file | f_radio | f_check | FIXME(outros?)
 
 ```
 - id: name
-  t: str 
-  h: name to be used in final classification   ## optional
-  req: True                                    ## optional
+  t: str                                       ## type
+  h: name to be used in final classification   ## help (optional)
+  req: True                                    ## required (optional, def:False)
 ```
 
 If a id value ends with an "!" this value is used as a key. Example
@@ -43,12 +45,10 @@ If a id value ends with an "!" this value is used as a key. Example
 ```
 - id: sexo
   t: radio
-  o: 
+  o:                                           ## options
      - masculino
      - feminino
-     - not provided
-  h:                                           ## optional
-  req: False                                   ## optional
+  req: False                              
 ```
 
 ### field tcheck example:
@@ -60,7 +60,6 @@ If a id value ends with an "!" this value is used as a key. Example
      - vaca
      - gato
      - crocodilo
-     - bicho pau
 ```
   
 ### field file example:
