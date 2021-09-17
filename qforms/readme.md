@@ -4,9 +4,11 @@ qforms - a quick local google-forms-like generator
 
 ## Synopsis
 
+```
  qforms conf.yaml   -- starts a server; in the end generates a conf_out.json output
  qforms -h          -- show this help                     (FIXME(not yet))
  qforms -c          -- shown a configurarion file example (FIXME(not yet))
+```
 
 ## Description
 
@@ -43,23 +45,25 @@ If a id value ends with an "!" this value is used as a key. Example
 ### field tradio example:
 
 ```
-- id: sexo
+- id: gender
   t: radio
-  o:                                           ## options
-     - masculino
-     - feminino
+  o:                                           ## available options
+     - masculine
+     - feminine
   req: False                              
 ```
 
 ### field tcheck example:
 
 ```
-- id: animais preferidos
+- id: favourite animal
   t: check
   o: 
-     - vaca
-     - gato
+     - cat
+     - cow
      - crocodilo
 ```
   
 ### field file example:
+
+### Ouput created
