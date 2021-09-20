@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 from flask import Flask, render_template, request
 from flask_ngrok import run_with_ngrok
-import sys, os, yaml, json, jjcli, waitress, hashlib
+import sys, os, yaml, json, jjcli, waitress, hashlib, shelve
+from datetime import datetime
 
 
 c = jjcli.clfilter(opt="d:cjh")
@@ -19,7 +20,11 @@ if '-h' in c.opt:
 
 #yaml path
 fconf = c.args[0]
-UPLOAD_FOLDER = '.'
+
+UPLOAD_FOLDER = fconf.split(sep='/')[-1][:-5] + '_uploads/'
+#create the upload directory
+if not os.path.exists(UPLOAD_FOLDER):
+    os.mkdir(UPLOAD_FOLDER)
 
 conf = yaml.load( open(fconf).read(), Loader=yaml.FullLoader)
 
@@ -31,17 +36,15 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #if '-n' in c.opt:
 #    run_with_ngrok(app)
 
-
-
 @app.route('/quest',methods = ['GET','POST'])
 def quest():
     if request.method == 'GET':
         return list2form (conf)
 
     if request.method == 'POST':
-        form2file(conf, request.form)
+        form2file(conf, request.form, request.files)
         upload_file(request.files)
-        return mostra_request (conf, request.form)
+        return mostra_request (conf, request.form, request.files)
 
 
 def list2form(l:list)->str:
@@ -56,7 +59,6 @@ def list2form(l:list)->str:
         d  = dic.get('h','')      # description, helper
         r  = dic.get('req',False) # required
         req = 'required' if r else ''
-
         # text box
         if t == 'str':
             h += f"<li> {id}: <input type='text' name='{id}' {req} /> </li> <p>{d}</p>\n"
@@ -77,9 +79,6 @@ def list2form(l:list)->str:
             h += f"<input type='file' name ='{id}'>\n"
 
     return h + fim
-
-
-
 
 
 def upload_file(d:dict):
@@ -104,18 +103,19 @@ def upload_file(d:dict):
             #adding extension and identification
             finalname = idnt + newname + ext
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], finalname)) 
-            print('teste')
             
             #f.save(os.path.join(app.config['UPLOAD_FOLDER'], newname)) 
 
 
 #takes a form and a list os dicts(from yaml) and stores it in json, csv files
-def form2file(l:list,d:dict)->str:
-    fdict = forms2dict(d)
-    fcsv  = forms2csv(l,d)
+def form2file(l:list,rfo:dict,rfi)->str:
+    #rfo → request.forms
+    #rfi → request.files
+    fdict = forms2dict(l,rfo,rfi)
+    fcsv  = forms2csv(l,rfo,rfi)
  
     title,*l2 = l
-    #path to yamell: fconf
+    #path to yaml: fconf
  
     #extracting the file name and path from fconf (first argument)
     lp = fconf.split(sep='/') #list with the path
@@ -127,7 +127,6 @@ def form2file(l:list,d:dict)->str:
         path = ''
     
     lId = listId(l) # list of dentifiers 
-
     # saving to csv
     if '-c' in c.opt:
         f = open(path+name+'.csv','a')
@@ -144,47 +143,62 @@ def form2file(l:list,d:dict)->str:
         f.write(json.dumps(fdict)+'\n')
         f.close()
 
+    s = shelve.open("teste")
+    chave = "nome teste"#FIXME
+    s[chave] = fdict
+    s.close()
+
 
 #"recieved" html for the POST method
-def mostra_request(l:list,d:dict)->str:
-    # l is the yaml conf
-    # d is the multidict (request.form)
-    print('\n')
-    print(request.form)
-    print('\n')
-    print(request.files)
-    print('\n')
-
-    title,*l2 = l
-    h   = f'<h1> Received : {title} </h1> <ul>'
+def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
+    #yc  → yaml conf
+    #rfo → request.forms
+    #rfi → request.files
+    title,*l = yc
+    h   = f'<h1> Received : {title} </h1> <h4> {date()}</h4><ul>'
     fim = '</ul>'
 
-    for dic in l2:
+    for dic in l:
         id = dic['id'] # name
         t  = dic.get('t','str') # types
         if t == 'check':
             h += f'<li> {id}: '
-            h += str.join(', ',d.getlist(id))
+            h += str.join(', ',rfo.getlist(id))
             h += '</li>'
+        if t == 'file':
+            lf = rfi.getlist(id)
+            fn = []
+            for f in lf:
+                fn.append(f.filename)
+            h += f'<li> {id}: '
+            h += str.join(', ',fn)
+            h += '</li>\n'
+            
         else:
-            h += f"<li> {id}: {d.get(id,'ignored')} </li>\n"
+            h += f"<li> {id}: {rfo.get(id,'ignored')} </li>\n"
     return h + fim
 
 #forms(multidict) to coma separated values
-def forms2csv(l:list,d:dict)->str:
-    # l is the yaml conf
-    # d is the multidict
-    title,*l2 = l
-    lId = listId(l) # list of identifiers
+def forms2csv(yc:list,rfo:dict,rfi:dict)->str:
+    # l yaml conf
+    #rfo → request.forms
+    #rfi → request.files
+    title,*l = yc
+    lId = listId(yc) # list of identifiers
     acc = []
-    for id in lId:
-        lo = d.getlist(id)
-        if not lo: #lo == []
-            acc.append('')
-        if len(lo) == 1: #one argument
-            acc.append(csv(lo[0]))
-        if len(lo) > 1: # multiple answers
-            acc.append(csv(', '.join(lo)))
+    for dic in l:
+        lo = []
+        id = dic['id']
+        if dic['t'] == 'file':
+            f = rfi[id]
+            lo = [UPLOAD_FOLDER + f.filename]
+        else:
+            lo = rfo.getlist(id)
+
+        acc.append(csv(', '.join(lo)))
+
+    acc.append(date())
+    acc.append(request.remote_addr)
     return ','.join(acc)
 
 #string to csv
@@ -205,16 +219,30 @@ def csv (word:str)->str:
     return wordcsv
 
 #convert a form (multidict) to a normal dict
-def forms2dict(l:dict)->dict:
+def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
+    #yc  → yaml configuration
+    #rfo → request.forms
+    #rfi → request.files
+    title,*l = yc
     acc = {}
-    for id in l:
-        lo = l.getlist(id)
+    for dic in l:
+        lo = []
+        id = dic['id']
+        if dic['t'] == 'file':
+            f = rfi[id]
+            lo += UPLOAD_FOLDER + f.filename
+            lo = ''.join(lo)
+        else:
+            lo = rfo.getlist(id)
         if len(lo) == 1:
             acc[id] = lo[0]
         else:
             acc[id] = lo
+
+        acc['date'] = date()  
+        acc['ip'] = request.remote_addr
     return acc
-    
+
 #returns a list of identifiers from the yaml config
 def listId(l:list)->list: 
     title,*l2 = l
@@ -223,13 +251,17 @@ def listId(l:list)->list:
         lacc.append(dic['id'])
     return lacc
 
+#get the date and time
+def date()->str:
+    now = datetime.now()
+    return now.strftime("%d/%m/%Y %H:%M:%S")
+
 if __name__ == '__main__':
     if "-d" in c.opt:
         waitress.serve(app, host=c.opt["-d"], port=8080)
     else:
         waitress.serve(app, host="localhost", port=8080)
     #app.run()
-
 
 # yaml.load ↓
 #['Torneio de xadrez viii edição Braga', {'id': 'nome', 't': 'str', 'h': 'descriçao nome completo', 'req': True}, {'id': 'sexo', 't': 'radio', 'o': ['masculino', 'feminino'], 'h': 'atençao abcdefghijklmnopqrstuvwxy', 'req': True}, {'id': 'checkbox', 't': 'check', 'o': ['vaca', 'gato', 'crocodilo', 'bicho pau']}]
