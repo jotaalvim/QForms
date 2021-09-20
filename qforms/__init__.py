@@ -1,14 +1,16 @@
 """
 Qforms: google-forms like local form generator tool
 """
-#!/usr/bin/python3
-
 from flask import Flask, render_template, request
 #from flask_ngrok import run_with_ngrok
 import sys, os, yaml, json, jjcli, waitress
+import hashlib, shelve, datetime
+
+
 app = Flask(__name__)
 conf={}
 __version__ = "0.3"
+
 c = None
 fconf = None
 
@@ -29,6 +31,17 @@ def main():
 
     fconf = c.args[0]
     conf = yaml.safe_load( open(fconf).read() )
+    #conf = yaml.load( open(fconf).read(), Loader=yaml.FullLoader)
+
+
+    UPLOAD_FOLDER = fconf.split(sep='/')[-1][:-5] + '_uploads/'
+    #create the upload directory
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.mkdir(UPLOAD_FOLDER)
+
+    #ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif' }
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
     if "-d" in c.opt:
         waitress.serve(app, host=c.opt["-d"], port=8080)
@@ -51,13 +64,15 @@ def quest():
         return list2form (conf)
 
     if request.method == 'POST':
-        form2file(conf, request.form)
-        return mostra_request (conf, request.form)
+        form2file(conf, request.form, request.files)
+        upload_file(request.files)
+        return mostra_request (conf, request.form, 
+                request.files)
 
 
 def list2form(l:list)->str:
     title,*l2 = l
-    h = f"<h1>{title}</h1>\n<form method='post'> <ul>"
+    h = f"<h1>{title}</h1>\n<form method='post' enctype='multipart/form-data'> <ul>"
     fim = "<input type=submit value='done'/> </ul></form>"
 
     for dic in l2:
@@ -84,12 +99,18 @@ def list2form(l:list)->str:
 
     
 #takes a form and a list os dicts(from yaml) and stores it in json, csv files
-def form2file(l:list,d:list)->str:
+def form2file(l:list,rfo:dict,rfi:dict)->str:
     global fconf
-    fdict = forms2dict(d)
-    fcsv  = forms2csv(l,d)
+    #rfo → request.forms
+    #rfi → request.files
+    #fconf path to yaml
+    
+    fdict = forms2dict(l,rfo,rfi)
+    fcsv  = forms2csv(l,rfo,rfi)
+
     title,*l2 = l
-    #path to yamell: fconf
+    #path to yaml: fconf
+
     #extracting the file name and path from fconf (first argument)
     lp = fconf.split(sep='/') #list with the path
     if len(lp) > 1:
@@ -98,61 +119,84 @@ def form2file(l:list,d:list)->str:
     else:
         name = lp [0][:-5]
         path = ''
-    
+
     lId = listId(l) # list of dentifiers 
-    # exporting to csv
+    # saving to csv
     if '-c' in c.opt:
-        exist = os.path.exists(path+name+'.csv')
         f = open(path+name+'.csv','a')
-        if not exist:
+        if not os.path.exists(path+name+'.csv'):
             f.write(f'{title}\n')
             f.write(','.join(lId)+'\n')
         f.write(fcsv+'\n')
         f.close()
-    #exporting to json
+    # saving to json
     if '-j' in c.opt:
-        exist = os.path.exists(path+name+'.json')
         f = open(path+name+'.json','a')
-        if not exist:
-            f.write(f'{{"title":"{title}"}}\n')
+        if not os.path.exists(path+name+'.json'):
+            f.write(f'{{"title":"{title}"}}')
         f.write(json.dumps(fdict)+'\n')
         f.close()
 
+    #s = shelve.open("teste.db")
+    #chave = "nome teste"#FIXME
+    #s[chave] = fdict
+    #s.close()
 
-#making the "recieved" html for the POST method
-def mostra_request(l:list,d:list)->str:
-    title,*l2 = l
-    h   = f'<h1> Received : {title} </h1> <ul>'
+def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
+    '"recieved" html for the POST method'
+    #yc  → yaml conf
+    #rfo → request.forms
+    #rfi → request.files
+    title,*l = yc
+    h   = f'<h1> Received : {title} </h1> <h4> {date()}</h4><ul>'
     fim = '</ul>'
 
-    for dic in l2:
+    for dic in l:
         id = dic['id'] # name
         t  = dic.get('t','str') # types
         if t == 'check':
             h += f'<li> {id}: '
-            h += str.join(', ',d.getlist(id))
+            h += str.join(', ',rfo.getlist(id))
             h += '</li>'
+        if t == 'file':
+            lf = rfi.getlist(id)
+            fn = []
+            for f in lf:
+                fn.append(f.filename)
+            h += f'<li> {id}: '
+            h += str.join(', ',fn)
+            h += '</li>\n'
+
         else:
-            h += f"<li> {id}: {d[id]} </li>\n"
+            h += f"<li> {id}: {rfo.get(id,'ignored')} </li>\n"
     return h + fim
 
-#forms to coma separated values
-def forms2csv(l:list,d:dict)->str:
-    title,*l2 = l
-    lId = listId(l) # list of identifiers
+def forms2csv(yc:list,rfo:dict,rfi:dict)->str:
+    'forms(multidict) to coma separated values'
+    # l yaml conf
+    #rfo → request.forms
+    #rfi → request.files
+    title,*l = yc
+    lId = listId(yc) # list of identifiers
     acc = []
-    for id in lId:
-        lo = d.getlist(id)
-        if not lo: #lo == []
-            acc.append('')
-        if len(lo) == 1: #one argument
-            acc.append(csv(lo[0]))
-        if len(lo) > 1: # multiple answers
-            acc.append(csv(', '.join(lo)))
+    for dic in l:
+        lo = []
+        id = dic['id']
+        if dic['t'] == 'file':
+            f = rfi[id]
+            lo = [UPLOAD_FOLDER + f.filename]
+        else:
+            lo = rfo.getlist(id)
+
+        acc.append(csv(', '.join(lo)))
+
+    acc.append(date())
+    acc.append(request.remote_addr)
     return ','.join(acc)
 
-#string to csv
+
 def csv (word:str)->str:
+    'string to csv'
     wordaux = ''
     if '"' in word:
         for l in word:
@@ -168,17 +212,33 @@ def csv (word:str)->str:
         wordcsv = '"'+wordcsv+'"'
     return wordcsv
 
-#convert a form to a dict
-def forms2dict(l:list)->dict:
+
+def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
+    'convert a form (multidict) to a normal dict'
+    #yc  → yaml configuration
+    #rfo → request.forms
+    #rfi → request.files
+    title,*l = yc
     acc = {}
-    for id in l:
-        lo = l.getlist(id)
+    for dic in l:
+        lo = []
+        id = dic['id']
+        if dic['t'] == 'file':
+            f = rfi[id]
+            lo += UPLOAD_FOLDER + f.filename
+            lo = ''.join(lo)
+        else:
+            lo = rfo.getlist(id)
         if len(lo) == 1:
             acc[id] = lo[0]
         else:
             acc[id] = lo
+
+        acc['date'] = date()
+        acc['ip'] = request.remote_addr
     return acc
-    
+
+
 def listId(l:list)->list:
     title,*l2 = l
     lacc = [] # list of identifiers
@@ -186,11 +246,19 @@ def listId(l:list)->list:
         lacc.append(dic['id'])
     return lacc
 
+#get the date and time
+def date()->str:
+    now = datetime.datetime.now()
+    return now.strftime("%d/%m/%Y %H:%M:%S")
 
 
-# yaml.load ↓
+
+
+# yaml.load
 #['Torneio de xadrez viii edição Braga', {'id': 'nome', 't': 'str', 'h': 'descriçao nome completo', 'req': True}, {'id': 'sexo', 't': 'radio', 'o': ['masculino', 'feminino'], 'h': 'atençao abcdefghijklmnopqrstuvwxy', 'req': True}, {'id': 'checkbox', 't': 'check', 'o': ['vaca', 'gato', 'crocodilo', 'bicho pau']}]
-# form request
+
+# request.form
 #ImmutableMultiDict([('nome', 'joao afonsoa alvim oliveida dias de almeida'), ('sexo', 'masculino'), ('checkbox', 'vaca'), ('checkbox', 'gato'), ('checkbox', 'crocodilo'), ('checkbox', 'bicho pau')])
+
 #json dumps
 #{"nome": "joao afonsoa alvim oliveida dias de almeida", "sexo": "masculino", "checkbox": "vaca"}
