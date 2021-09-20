@@ -9,7 +9,8 @@ import hashlib, shelve, datetime
 
 app = Flask(__name__)
 conf={}
-__version__ = "0.3"
+
+__version__ = "0.4"
 
 c = None
 fconf = None
@@ -154,11 +155,13 @@ def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
     for dic in l:
         id = dic['id'] # name
         t  = dic.get('t','str') # types
+
         if t == 'check':
             h += f'<li> {id}: '
             h += str.join(', ',rfo.getlist(id))
             h += '</li>'
-        if t == 'file':
+
+        elif t == 'file':
             lf = rfi.getlist(id)
             fn = []
             for f in lf:
@@ -166,10 +169,43 @@ def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
             h += f'<li> {id}: '
             h += str.join(', ',fn)
             h += '</li>\n'
-
         else:
             h += f"<li> {id}: {rfo.get(id,'ignored')} </li>\n"
+
     return h + fim
+
+
+def upload_file(d:dict):
+    # d is a multidict(request.files)
+    for key in d:
+        if d[key]: #d[key] != "" houve submissao de ficheiro
+            f = d[key] #name
+            c = f.read()
+             
+
+            print(c)
+
+            oldname = f.filename
+            
+            l = oldname.split(sep='.')
+            if len(l) > 1:
+                ext = '.'+l[-1]
+            else:
+                ext = ''
+
+            # calculating the file md5 
+            newname = hashlib.md5(c).hexdigest()
+
+            idnt = key
+            #adding extension and identification
+            finalname = idnt + newname + ext
+
+            f = open(os.path.join(app.config['UPLOAD_FOLDER'], finalname),'wb')
+            f.write(c)
+            f.close()
+
+            #f.save(os.path.join(app.config['UPLOAD_FOLDER'], newname)) 
+
 
 def forms2csv(yc:list,rfo:dict,rfi:dict)->str:
     'forms(multidict) to coma separated values'
@@ -184,7 +220,7 @@ def forms2csv(yc:list,rfo:dict,rfi:dict)->str:
         id = dic['id']
         if dic['t'] == 'file':
             f = rfi[id]
-            lo = [UPLOAD_FOLDER + f.filename]
+            lo = [app.config['UPLOAD_FOLDER'] + f.filename]
         else:
             lo = rfo.getlist(id)
 
@@ -225,7 +261,7 @@ def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
         id = dic['id']
         if dic['t'] == 'file':
             f = rfi[id]
-            lo += UPLOAD_FOLDER + f.filename
+            lo += app.config['UPLOAD_FOLDER'] + f.filename
             lo = ''.join(lo)
         else:
             lo = rfo.getlist(id)
