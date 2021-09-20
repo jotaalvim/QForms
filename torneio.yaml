@@ -3,8 +3,8 @@
 - id: nome
   t: str 
   h: descriçao nome completo
-  req: True
-  
+  key: 
+
 - id: sexo
   t: radio
   o: 
@@ -12,7 +12,7 @@
      - feminino
      - outro
   h: atençao abcdefghijklmnopqrstuvwxy
-  req: True 
+  #req: True 
 
 - id: animais preferidos
   t: check
@@ -21,7 +21,7 @@
      - gato
      - crocodilo
      - bicho pau
-    #campo pattern
+   #campo pattern
 
 - id: cor preferida
   t: radio
@@ -29,4 +29,8 @@
      - verde
      - amarelo
      - vermelho
-  req: True
+   #req: True
+
+- id: ficheiro
+  t: file
+  #req: True

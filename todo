@@ -2,19 +2,19 @@ dar para ter respostas certas erradas
 
 funçao de avaliação/resposta
 
-upload de ficheiros
-
 por utf8 no json
 
 -s esqueleto ou exemplo da configuração
 
 chave de apagar por exemplo numero de aluno repetido
 
-md5→  id.md5.extençao
--h para guardar ficheiros com data e hora
+t: file*  (multiple no html)
 
 
 feito:
+    upload de ficheiros
+    md5→  id.md5.extençao
+    -h para guardar ficheiros com data e hora
     -c em csv
     -j para gravar aem json 
     ngrok como opção

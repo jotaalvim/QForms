@@ -143,10 +143,10 @@ def form2file(l:list,rfo:dict,rfi)->str:
         f.write(json.dumps(fdict)+'\n')
         f.close()
 
-    s = shelve.open("teste")
-    chave = "nome teste"#FIXME
-    s[chave] = fdict
-    s.close()
+    #s = shelve.open("teste.db")
+    #chave = "nome teste"#FIXME
+    #s[chave] = fdict
+    #s.close()
 
 
 #"recieved" html for the POST method

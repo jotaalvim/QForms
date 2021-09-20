@@ -1,1 +1,5 @@
 **/__pycache__/
+torneio.csv
+torneio.json
+dist/
+torneio_uploads/
