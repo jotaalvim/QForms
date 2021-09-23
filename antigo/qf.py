@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request
 from flask_ngrok import run_with_ngrok
 import sys, os, yaml, json, jjcli, waitress, hashlib, shelve
-from datetime import datetime
+import datetime
 
 
 c = jjcli.clfilter(opt="d:cjh")
@@ -253,7 +253,7 @@ def listId(l:list)->list:
 
 #get the date and time
 def date()->str:
-    now = datetime.now()
+    now = datetime.datetime.now()
     return now.strftime("%d/%m/%Y %H:%M:%S")
 
 if __name__ == '__main__':

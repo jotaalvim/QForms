@@ -35,7 +35,11 @@ def main():
     #conf = yaml.load( open(fconf).read(), Loader=yaml.FullLoader)
 
 
-    UPLOAD_FOLDER = fconf.split(sep='/')[-1][:-5] + '_uploads/'
+    head,tail = os.path.split(fconf)
+    tail = tail.replace('.yaml','')
+    dirname = tail + '_uploads'
+    UPLOAD_FOLDER = os.path.join( head , dirname ) 
+
     #create the upload directory
     if not os.path.exists(UPLOAD_FOLDER):
         os.mkdir(UPLOAD_FOLDER)
@@ -96,44 +100,43 @@ def list2form(l:list)->str:
             for elem in op:
                 h += f"<input type='checkbox' name='{id}' value='{elem}' >  {elem}</input> <br/>"
             h += f'</li> <p>{d}</p>\n'
+        # submit files
+        if t == 'file':
+            h += f"<input type='file' name ='{id}'>\n"	
     return h + fim
 
     
-#takes a form and a list os dicts(from yaml) and stores it in json, csv files
-def form2file(l:list,rfo:dict,rfi:dict)->str:
+def form2file(yc:list,rfo:dict,rfi:dict)->str:
+    'takes a form and a list os dicts(from yaml) and stores it in json, csv files'
     global fconf
     #rfo → request.forms
     #rfi → request.files
     #fconf path to yaml
     
-    fdict = forms2dict(l,rfo,rfi)
-    fcsv  = forms2csv(l,rfo,rfi)
+    fdict = forms2dict(yc,rfo,rfi)
+    fcsv  = forms2csv (yc,rfo,rfi)
 
-    title,*l2 = l
+    title,*l = yc
     #path to yaml: fconf
+    
+    path,name = os.path.split(fconf)
+    path = path.replace('.yaml','')
+    dirname = path + '_uploads'
 
-    #extracting the file name and path from fconf (first argument)
-    lp = fconf.split(sep='/') #list with the path
-    if len(lp) > 1:
-        name = lp[-1][:-5] # from: 'path/path/name.yaml' returns: 'name'
-        path = '/'.join(lp[:-1])+'/' #path without the file
-    else:
-        name = lp [0][:-5]
-        path = ''
 
-    lId = listId(l) # list of dentifiers 
+    lId = listId(yc) # list of dentifiers 
     # saving to csv
     if '-c' in c.opt:
-        f = open(path+name+'.csv','a')
-        if not os.path.exists(path+name+'.csv'):
+        f = open(os.path.join(path,name+'.csv'),'a')
+        if not os.path.exists(os.path.join(path,name+'.csv')):
             f.write(f'{title}\n')
             f.write(','.join(lId)+'\n')
         f.write(fcsv+'\n')
         f.close()
     # saving to json
     if '-j' in c.opt:
-        f = open(path+name+'.json','a')
-        if not os.path.exists(path+name+'.json'):
+        f = open(os.path.join(path,name+'.json') ,'a')
+        if not os.path.exists(os.path.join(path, name+'.json')):
             f.write(f'{{"title":"{title}"}}')
         f.write(json.dumps(fdict)+'\n')
         f.close()
@@ -144,7 +147,7 @@ def form2file(l:list,rfo:dict,rfi:dict)->str:
     #s.close()
 
 def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
-    '"recieved" html for the POST method'
+    'recieved html for the POST method'
     #yc  → yaml conf
     #rfo → request.forms
     #rfi → request.files
@@ -182,9 +185,6 @@ def upload_file(d:dict):
             f = d[key] #name
             c = f.read()
              
-
-            print(c)
-
             oldname = f.filename
             
             l = oldname.split(sep='.')
@@ -220,7 +220,7 @@ def forms2csv(yc:list,rfo:dict,rfi:dict)->str:
         id = dic['id']
         if dic['t'] == 'file':
             f = rfi[id]
-            lo = [app.config['UPLOAD_FOLDER'] + f.filename]
+            lo = [ os.path.join(app.config['UPLOAD_FOLDER'],f.filename) ]
         else:
             lo = rfo.getlist(id)
 
@@ -261,8 +261,9 @@ def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
         id = dic['id']
         if dic['t'] == 'file':
             f = rfi[id]
-            lo += app.config['UPLOAD_FOLDER'] + f.filename
+            lo += os.path.join(app.config['UPLOAD_FOLDER'],f.filename)
             lo = ''.join(lo)
+
         else:
             lo = rfo.getlist(id)
         if len(lo) == 1:
@@ -275,15 +276,15 @@ def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
     return acc
 
 
-def listId(l:list)->list:
-    title,*l2 = l
+def listId(yc:list)->list:
+    title,*l = yc
     lacc = [] # list of identifiers
-    for dic in l2:
+    for dic in l:
         lacc.append(dic['id'])
     return lacc
 
-#get the date and time
 def date()->str:
+    'get the date and time'
     now = datetime.datetime.now()
     return now.strftime("%d/%m/%Y %H:%M:%S")
 
