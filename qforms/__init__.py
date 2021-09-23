@@ -120,23 +120,27 @@ def form2file(yc:list,rfo:dict,rfi:dict)->str:
     #path to yaml: fconf
     
     path,name = os.path.split(fconf)
-    path = path.replace('.yaml','')
+    name = path.replace('.yaml','')
     dirname = path + '_uploads'
 
 
     lId = listId(yc) # list of dentifiers 
     # saving to csv
     if '-c' in c.opt:
-        f = open(os.path.join(path,name+'.csv'),'a')
-        if not os.path.exists(os.path.join(path,name+'.csv')):
+        nome = os.path.join(path,name+'.csv')
+        print(nome)
+        f = open(nome,'a')
+        if not os.path.exists(nome):
             f.write(f'{title}\n')
             f.write(','.join(lId)+'\n')
         f.write(fcsv+'\n')
         f.close()
     # saving to json
     if '-j' in c.opt:
-        f = open(os.path.join(path,name+'.json') ,'a')
-        if not os.path.exists(os.path.join(path, name+'.json')):
+        nome = os.path.join(path,name+'.json')
+        print(nome)
+        f = open(nome ,'a')
+        if not os.path.exists(nome):
             f.write(f'{{"title":"{title}"}}')
         f.write(json.dumps(fdict)+'\n')
         f.close()
