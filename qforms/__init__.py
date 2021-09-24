@@ -56,8 +56,6 @@ def main():
 
 
 
-
-
 #if '-n' in c.opt:
 #    run_with_ngrok(app)
 
@@ -102,7 +100,7 @@ def list2form(l:list)->str:
             h += f'</li> <p>{d}</p>\n'
         # submit files
         if t == 'file':
-            h += f"<input type='file' name ='{id}'>\n"	
+            h += f"<input type='file' name ='{id}' multiple>\n"	
     return h + fim
 
     
@@ -120,27 +118,25 @@ def form2file(yc:list,rfo:dict,rfi:dict)->str:
     #path to yaml: fconf
     
     path,name = os.path.split(fconf)
-    name = path.replace('.yaml','')
-    dirname = path + '_uploads'
+    name = name.replace('.yaml','')
+    #dirname = name + '_uploads'
 
 
     lId = listId(yc) # list of dentifiers 
     # saving to csv
     if '-c' in c.opt:
-        nome = os.path.join(path,name+'.csv')
-        print(nome)
-        f = open(nome,'a')
-        if not os.path.exists(nome):
+        pathcsv = os.path.join(path,name+'.csv')
+        f = open(pathcsv,'a')
+        if not os.path.exists(pathcsv):
             f.write(f'{title}\n')
             f.write(','.join(lId)+'\n')
         f.write(fcsv+'\n')
         f.close()
     # saving to json
     if '-j' in c.opt:
-        nome = os.path.join(path,name+'.json')
-        print(nome)
-        f = open(nome ,'a')
-        if not os.path.exists(nome):
+        pathjson = os.path.join(path,name+'.json')
+        f = open(pathjson ,'a')
+        if not os.path.exists(pathjson):
             f.write(f'{{"title":"{title}"}}')
         f.write(json.dumps(fdict)+'\n')
         f.close()
