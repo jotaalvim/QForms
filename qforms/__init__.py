@@ -141,10 +141,20 @@ def form2file(yc:list,rfo:dict,rfi:dict)->str:
         f.write(json.dumps(fdict)+'\n')
         f.close()
 
-    #s = shelve.open("teste.db")
-    #chave = "nome teste"#FIXME
-    #s[chave] = fdict
-    #s.close()
+
+    s = shelve.open( os.path.join(path, name+'.db'))
+    #função que busca a chave
+    #FIXME
+    chave = 'nome'
+
+    if chave in s:
+        value = s[chave]
+        value.append( fdict )
+        s[chave] = value
+    else:
+        s[chave] = [fdict]
+    
+    s.close()
 
 def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
     'recieved html for the POST method'
