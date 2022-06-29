@@ -1,10 +1,10 @@
 dar para ter respostas certas erradas
 
-funçao de avaliação/resposta
+função de avaliação/resposta
 
-por utf8 no json
+pôr utf8 no json
 
--s esqueleto ou exemplo da configuração
+opção -s  gerar esqueleto ou exemplo da configuração
 
 chave de apagar por exemplo numero de aluno repetido
 
@@ -13,8 +13,8 @@ t: file*  (multiple no html)
 
 feito:
     upload de ficheiros
-    md5→  id.md5.extençao
+    md5 →  id.md5.extençao
     -h para guardar ficheiros com data e hora
     -c em csv
-    -j para gravar aem json 
+    -j para gravar em json 
     ngrok como opção
