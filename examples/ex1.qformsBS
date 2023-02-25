@@ -1,0 +1,6 @@
+- title: Teste de covid para torneio
+campos:
+  nome* : text
+  data nascimento : date
+  ncc* : int
+  nus* : int
