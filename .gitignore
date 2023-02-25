@@ -3,5 +3,5 @@ torneio.csv
 torneio.json
 dist/
 torneio_uploads/
-pyproject.toml
 qforms/cabula
+*.db
