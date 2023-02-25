@@ -3,18 +3,22 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
+
 name = "qforms"
+
 authors = [
     {name = "Jo\u00e3o Alvim", email = "joaoafonsoalvim@gmail.com"},
     {name = "JJoao", email ="jj@di.uminho.pt"}] 
+
 dynamic = ["version", "description"]
 readme = "qforms/readme.md"
 keywords = ["forms","flask"]
+
 dependencies = [
     "flask",
     "waitress",
     "pyyaml",
-    "jjcli",
+    "jjcli"
 ]
 
 [project.scripts]

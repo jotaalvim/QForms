@@ -1,9 +1,8 @@
 - Torneio de xadrez viii edição Braga
 
-- id: nome
+- id: nome!
   t: str 
-  h: descriçao nome completo
-  key: 
+  h: descriçao nome completo nice
 
 - id: sexo
   t: radio
@@ -13,6 +12,7 @@
      - outro
   h: atençao abcdefghijklmnopqrstuvwxy
   #req: True 
+
 
 - id: animais preferidos
   t: check

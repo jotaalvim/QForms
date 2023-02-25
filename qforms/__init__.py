@@ -1,6 +1,7 @@
 """
 Qforms: google-forms like local form generator tool
 """
+
 from flask import Flask, render_template, request
 #from flask_ngrok import run_with_ngrok
 import sys, os, yaml, json, jjcli, waitress
@@ -15,10 +16,29 @@ __version__ = "0.4"
 c = None
 fconf = None
 
-def main():
-    global c,conf, fconf
-    c = jjcli.clfilter(opt="d:cjh")
 
+class qformsConfig:
+    ()
+
+def main():
+    """Personal form generator 
+
+    Usage: qforms [options] config.yaml
+    Options: 
+        -j : export to <title>.json
+        -c : export to <title>.csv
+        -d <domain> : server host = domain (def: localhost) 
+        -h : this help
+        -s : FIXME
+    """
+
+    global c,conf, fconf
+    c = jjcli.clfilter(opt="sd:cjh",doc=main.__doc__)
+
+    if '-s' in c.opt :
+        print(
+        """
+        """)
     if '-h' in c.opt:
         print(
         """Usage: qforms [options] config.yaml   
@@ -34,6 +54,10 @@ def main():
     conf = yaml.safe_load( open(fconf).read() )
     #conf = yaml.load( open(fconf).read(), Loader=yaml.FullLoader)
 
+    #FIXME
+    #conf_key = updateconf(conf)
+
+
 
     head,tail = os.path.split(fconf)
     tail = tail.replace('.yaml','')
@@ -46,6 +70,8 @@ def main():
 
     #ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif' }
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config['KEY'] = None
+    app.config['TITLE'] = None
 
 
     if "-d" in c.opt:
@@ -60,18 +86,31 @@ def main():
 #    run_with_ngrok(app)
 
 
+@app.route('/login',methods = ['GET','POST'])
+def login():
+    #FIXME
+    if request.method == 'GET':
+        return key2form(conf)
+    if request.method == 'POST':
+        return "asd"
+    #fazer uma autenticação
+
 
 @app.route('/quest',methods = ['GET','POST'])
 def quest():
     if request.method == 'GET':
-        return list2form (conf)
+        return list2form(conf)
 
     if request.method == 'POST':
         form2file(conf, request.form, request.files)
         upload_file(request.files)
-        return mostra_request (conf, request.form, 
+        return mostra_request(conf, request.form, 
                 request.files)
 
+def key2form(yc:list)->str:
+    key = getkey(yc)
+    #FIXME
+    return 
 
 def list2form(l:list)->str:
     title,*l2 = l
@@ -143,10 +182,10 @@ def form2file(yc:list,rfo:dict,rfi:dict)->str:
 
 
     s = shelve.open( os.path.join(path, name+'.db'))
+
     #função que busca a chave
     #FIXME
     chave = 'nome'
-
     if chave in s:
         value = s[chave]
         value.append( fdict )
@@ -162,8 +201,13 @@ def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
     #rfo → request.forms
     #rfi → request.files
     title,*l = yc
-    h   = f'<h1> Received : {title} </h1> <h4> {date()}</h4><ul>'
-    fim = '</ul>'
+    h ="""
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<div class="container">"""
+
+    h  += f'<h1> Received : {title} </h1> <h4> {date()}</h4><ul>'
+    fim = '</ul> </div>'
 
     for dic in l:
         id = dic['id'] # name
@@ -287,11 +331,20 @@ def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
 
 
 def listId(yc:list)->list:
+    'get the list of identifiers form yaml conf'
     title,*l = yc
     lacc = [] # list of identifiers
     for dic in l:
         lacc.append(dic['id'])
     return lacc
+
+def getkey(yc:list)->str:
+    li = listId(yc)
+    for id in li:
+        if '!' in id:
+            return sub(r'!','',id) #find replace
+    return None
+
 
 def date()->str:
     'get the date and time'

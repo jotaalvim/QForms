@@ -1,20 +1,33 @@
-dar para ter respostas certas erradas
+# Qforms todo list
 
-funçao de avaliação/resposta
+## Rotas
+* rota do pretty print na rota mostraquest
+- rota de mostrar estatísticas e respostas
+* por utf8 no json
+* rota edit
 
-por utf8 no json
+## Pequenas coisas
+* -s esqueleto ou exemplo da configuração
 
--s esqueleto ou exemplo da configuração
+## Problemas
+* ficheiros estão com nome diferente do que são submetidos, impossível saber qual é qual
+	* é preciso guardar com uma chave?
 
-chave de apagar por exemplo numero de aluno repetido
+* chave de apagar por exemplo numero de aluno repetido
+* limite de tamanha ao enviar
+* t: file*  (multiple no html)
+* guardar por chave também no json
 
-t: file*  (multiple no html)
+* uma chave a ser uma par ou vaias coisa
+* controlar campos preenchidos?
+ * mudar estrutura das upload folder para guardar csv,s json etc
 
 
-feito:
+# Implementado
     upload de ficheiros
     md5→  id.md5.extençao
     -h para guardar ficheiros com data e hora
     -c em csv
-    -j para gravar aem json 
+    -j para gravar aem json
     ngrok como opção
+
