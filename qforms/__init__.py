@@ -7,12 +7,10 @@ from flask import Flask, render_template, request
 import sys, os, yaml, json, jjcli, waitress
 import hashlib, shelve, datetime
 
-
-app = Flask(__name__)
-conf={}
-
 __version__ = "0.4"
+app = Flask(__name__)
 
+conf={}
 c = None
 fconf = None
 
@@ -105,7 +103,6 @@ def quest():
         upload_file(request.files)
         return mostra_request(conf, request.form, 
                 request.files)
-
 
 
 def getName(filename:str)->str:
@@ -261,7 +258,6 @@ def upload_file(d:dict):
             c = f.read()
              
             oldname = f.filename
-            
             l = oldname.split(sep='.')
             if len(l) > 1:
                 ext = '.'+l[-1]
@@ -275,7 +271,10 @@ def upload_file(d:dict):
             #adding extension and identification
             finalname = idnt + newname + ext
 
-            f = open(os.path.join(app.config['UPLOAD_FOLDER'], finalname),'wb')
+            name = getName(fconf)
+            path = app.config['UPLOAD_FOLDER']
+
+            f = open(os.path.join(path, name+"_submitted_files",finalname),'wb')
             f.write(c)
             f.close()
 
