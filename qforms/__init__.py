@@ -17,9 +17,6 @@ c = None
 fconf = None
 
 
-class qformsConfig:
-    ()
-
 def main():
     """Personal form generator 
 
@@ -38,7 +35,9 @@ def main():
     if '-s' in c.opt :
         print(
         """
+        FIXME
         """)
+
     if '-h' in c.opt:
         print(
         """Usage: qforms [options] config.yaml   
@@ -54,19 +53,19 @@ def main():
     conf = yaml.safe_load( open(fconf).read() )
     #conf = yaml.load( open(fconf).read(), Loader=yaml.FullLoader)
 
-    #FIXME
-    #conf_key = updateconf(conf)
-
-
-
-    head,tail = os.path.split(fconf)
-    tail = tail.replace('.yaml','')
-    dirname = tail + '_uploads'
-    UPLOAD_FOLDER = os.path.join( head , dirname ) 
+    UPLOAD_FOLDER = getPath(fconf)
 
     #create the upload directory
     if not os.path.exists(UPLOAD_FOLDER):
         os.mkdir(UPLOAD_FOLDER)
+    #subdirectory to submitted files
+    subd = os.path.join(UPLOAD_FOLDER, getName(fconf)+"_submitted_files")
+    
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.mkdir(UPLOAD_FOLDER)
+
+    if not os.path.exists(subd):
+        os.mkdir(subd)
 
     #ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif' }
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -107,6 +106,22 @@ def quest():
         return mostra_request(conf, request.form, 
                 request.files)
 
+
+
+def getName(filename:str)->str:
+    head,tail = os.path.split(filename)
+    return tail.replace('.yaml','')
+
+
+def getPath(filename:str)->str:
+    "return the uploads directory path"
+    head,tail = os.path.split(filename)
+    file_name = tail.replace('.yaml','')
+    dirname = file_name + '_uploads'
+    return os.path.join( head , dirname ) 
+
+
+
 def key2form(yc:list)->str:
     key = getkey(yc)
     #FIXME
@@ -114,7 +129,8 @@ def key2form(yc:list)->str:
 
 def list2form(l:list)->str:
     title,*l2 = l
-    h = f"<h1>{title}</h1>\n<form method='post' enctype='multipart/form-data'> <ul>"
+    h = '<!DOCTYPE html>\n'
+    h += f"<h1>{title}</h1>\n<form method='post' enctype='multipart/form-data'> <ul>"
     fim = "<input type=submit value='done'/> </ul></form>"
 
     for dic in l2:
@@ -146,40 +162,49 @@ def list2form(l:list)->str:
 def form2file(yc:list,rfo:dict,rfi:dict)->str:
     'takes a form and a list os dicts(from yaml) and stores it in json, csv files'
     global fconf
+    #fconf path to yaml
+
     #rfo → request.forms
     #rfi → request.files
-    #fconf path to yaml
     
     fdict = forms2dict(yc,rfo,rfi)
-    fcsv  = forms2csv (yc,rfo,rfi)
 
     title,*l = yc
-    #path to yaml: fconf
-    
-    path,name = os.path.split(fconf)
-    name = name.replace('.yaml','')
-    #dirname = name + '_uploads'
 
+    name = getName(fconf)
+    path = app.config['UPLOAD_FOLDER']
 
     lId = listId(yc) # list of dentifiers 
+
     # saving to csv
     if '-c' in c.opt:
-        pathcsv = os.path.join(path,name+'.csv')
-        f = open(pathcsv,'a')
+        fcsv  = forms2csv (yc,rfo,rfi)
+        pathcsv = os.path.join(path, name+'.csv')
+
         if not os.path.exists(pathcsv):
+            f = open(pathcsv, "x")
+            f.close()
+            f = open(pathcsv,'a')
             f.write(f'{title}\n')
             f.write(','.join(lId)+'\n')
+            f.close()
+
+        f = open(pathcsv,'a')
         f.write(fcsv+'\n')
         f.close()
+
     # saving to json
     if '-j' in c.opt:
         pathjson = os.path.join(path,name+'.json')
-        f = open(pathjson ,'a')
         if not os.path.exists(pathjson):
+            f = open(pathjson, "x")
+            f.close()
+            f = open(pathjson,'a')
             f.write(f'{{"title":"{title}"}}')
+            f.close()
+        f = open(pathjson ,'a')
         f.write(json.dumps(fdict)+'\n')
         f.close()
-
 
     s = shelve.open( os.path.join(path, name+'.db'))
 
@@ -201,13 +226,9 @@ def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
     #rfo → request.forms
     #rfi → request.files
     title,*l = yc
-    h ="""
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-<div class="container">"""
-
+    h = '<!DOCTYPE html>\n'
     h  += f'<h1> Received : {title} </h1> <h4> {date()}</h4><ul>'
-    fim = '</ul> </div>'
+    fim = '</ul>'
 
     for dic in l:
         id = dic['id'] # name
@@ -274,7 +295,10 @@ def forms2csv(yc:list,rfo:dict,rfi:dict)->str:
         id = dic['id']
         if dic['t'] == 'file':
             f = rfi[id]
-            lo = [ os.path.join(app.config['UPLOAD_FOLDER'],f.filename) ]
+            if f.filename == None:
+                lo = []
+            else:
+                lo = [ os.path.join(app.config['UPLOAD_FOLDER'],f.filename) ]
         else:
             lo = rfo.getlist(id)
 
@@ -345,14 +369,10 @@ def getkey(yc:list)->str:
             return sub(r'!','',id) #find replace
     return None
 
-
 def date()->str:
     'get the date and time'
     now = datetime.datetime.now()
     return now.strftime("%d/%m/%Y %H:%M:%S")
-
-
-
 
 # yaml.load
 #['Torneio de xadrez viii edição Braga', {'id': 'nome', 't': 'str', 'h': 'descriçao nome completo', 'req': True}, {'id': 'sexo', 't': 'radio', 'o': ['masculino', 'feminino'], 'h': 'atençao abcdefghijklmnopqrstuvwxy', 'req': True}, {'id': 'checkbox', 't': 'check', 'o': ['vaca', 'gato', 'crocodilo', 'bicho pau']}]
