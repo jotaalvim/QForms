@@ -96,7 +96,11 @@ def login():
 @app.route('/quest',methods = ['GET','POST'])
 def quest():
     if request.method == 'GET':
-        return list2form(conf)
+        #return list2form(conf)
+
+        test_form = {"nome!": "joao afonsoa alvim oliveida dias de almeida", "sexo": "masculino", "animais preferidos":
+                ["gato","vaca"], "cor preferida":"vermelho"}
+        return list2formFilled(conf, test_form)
 
     if request.method == 'POST':
         form2file(conf, request.form, request.files)
@@ -373,11 +377,57 @@ def date()->str:
     now = datetime.datetime.now()
     return now.strftime("%d/%m/%Y %H:%M:%S")
 
-# yaml.load
-#['Torneio de xadrez viii edição Braga', {'id': 'nome', 't': 'str', 'h': 'descriçao nome completo', 'req': True}, {'id': 'sexo', 't': 'radio', 'o': ['masculino', 'feminino'], 'h': 'atençao abcdefghijklmnopqrstuvwxy', 'req': True}, {'id': 'checkbox', 't': 'check', 'o': ['vaca', 'gato', 'crocodilo', 'bicho pau']}]
+
 
 # request.form
 #ImmutableMultiDict([('nome', 'joao afonsoa alvim oliveida dias de almeida'), ('sexo', 'masculino'), ('checkbox', 'vaca'), ('checkbox', 'gato'), ('checkbox', 'crocodilo'), ('checkbox', 'bicho pau')])
 
 #json dumps
 #{"nome": "joao afonsoa alvim oliveida dias de almeida", "sexo": "masculino", "checkbox": "vaca"}
+
+# yaml.load
+#['Torneio de xadrez viii edição Braga', {'id': 'nome', 't': 'str', 'h': 'descriçao nome completo', 'req': True}, {'id': 'sexo', 't': 'radio', 'o': ['masculino', 'feminino'], 'h': 'atençao abcdefghijklmnopqrstuvwxy', 'req': True}, {'id': 'checkbox', 't': 'check', 'o': ['vaca', 'gato', 'crocodilo', 'bicho pau']}]
+
+def list2formFilled(l:list, form:dict)->str:
+    title,*l2 = l
+    h = '<!DOCTYPE html>\n'
+    h += f"<h1>{title}</h1>\n<form method='post' enctype='multipart/form-data'> <ul>"
+    fim = "<input type=submit value='done'/> </ul></form>"
+
+    for dic in l2:
+        id = dic['id'] # name
+        t  = dic.get('t','str') # types
+        op = dic.get('o') # options
+        d  = dic.get('h','') # description, helper
+        r  = dic.get('req',False) # required
+        req = 'required' if r else ''
+
+        if t == 'str':
+            val = form.get(id,'')
+            h += f"<li> {id}: <input type='text' name='{id}' value='{val}' {req} /> </li> <p>{d}</p>\n"
+        if t == 'radio': # selects on of diferent buttons 
+            h += f'<li>{id}: <br/>'
+            for elem in op:
+                if elem in form.get(id,''):
+                    val = 'checked="checked"'
+                else:
+                    val = ''
+                h += f"<input type='radio' name='{id}' value='{elem}' {val} {req} >  {elem}</input> <br/>"
+            h += f'</li>  <p>{d}</p>\n'
+        if t == 'check':# checkbox buttons
+            h += f'<li>{id}: <br/>'
+            for elem in op:
+                if elem in form.get(id,''):
+                    val = 'checked'
+                else:
+                    val = ''
+                h += f"<input type='checkbox' name='{id}' value='{elem}' {val} >  {elem}</input> <br/>"
+            h += f'</li> <p>{d}</p>\n'
+        # submit files
+        # FIXME fetch the name
+        if t == 'file':
+            h += f""" 
+            <input type='file' id='files'  name ='{id}' multiple>
+            """
+
+    return h + fim
