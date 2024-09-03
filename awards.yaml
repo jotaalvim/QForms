@@ -2,13 +2,13 @@
 
 - id: name!
   t: str
-  h: Write your name here
+  h: 
   req: True
 
 - id: Best Dressed Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -25,17 +25,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -51,21 +51,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
-    - Lukas
+    - Lucas (German)
+    - Lukas (Spanish)
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -75,30 +75,30 @@
     - Miriam
     - Monami
     - Nengyuan
-    - Oleksandr
+    - Oleksandr 
     - Oleksandra
     - Ono
     - Peter
     - Pranav
     - Raeyoung
     - Riccardo
-    - Rohan
-    - Ronan
+    - Rohan 
+    - Ronan (Irish)
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -111,7 +111,7 @@
 - id: Choose 2 people - Best Couple Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -128,17 +128,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -154,21 +154,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -190,18 +190,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -212,7 +212,7 @@
 - id: Choose 3 people - Best Throuple Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -229,17 +229,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -255,21 +255,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -291,18 +291,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -314,7 +314,7 @@
 - id: Best Climber Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -331,17 +331,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -357,21 +357,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -393,120 +393,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
-    - Witold
-    - Yannick
-    - Yeirys
-    - Yifeng
-    - Yiwei
-    - Yufei
-
-
-- id: Biggest Yank Award
-  t: check
-  o:
-    - Abigail
-    - Alberto
-    - Albina
-    - Alexander
-    - Alexandra
-    - Amina
-    - Anastasiia
-    - Andrea
-    - Anke
-    - Anton
-    - Arzoo
-    - Aurora
-    - Bartłomiej (Bartek)
-    - Benjamin
-    - Berna
-    - Bowen
-    - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
-    - Dabin
-    - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
-    - Daria
-    - Daryna
-    - Elena
-    - Eleni
-    - Emanuele
-    - Eunjin
-    - Filip
-    - Giovanni
-    - Hanyi
-    - Hayden
-    - Iliana
-    - Isaac
-    - Isabel
-    - Ivan
-    - Javier
-    - Jernej
-    - Joanne
-    - João
-    - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
-    - Juan
-    - Karla
-    - Kateryna
-    - Konrad
-    - Koray
-    - Lina
-    - Lucas
-    - Lukas
-    - Maike
-    - Marco
-    - Marcos
-    - Marta
-    - Martina
-    - Matteo Durando
-    - Matteo Spaziani
-    - Max
-    - Minsu
-    - Miriam
-    - Monami
-    - Nengyuan
-    - Oleksandr
-    - Oleksandra
-    - Ono
-    - Peter
-    - Pranav
-    - Raeyoung
-    - Riccardo
-    - Rohan
-    - Ronan
-    - Sarawit
-    - Sebastián
-    - Siemen
-    - Simon
-    - Simone
-    - Sophia
-    - Thirathep
-    - Tianchi
-    - Tom
-    - Valeriia
-    - Veronika
-    - Viktoriia
-    - Violeta
-    - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -518,7 +416,7 @@
 - id: Most Chilled Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -535,17 +433,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -561,21 +459,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -597,18 +495,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -620,7 +518,7 @@
 - id: Least Chilled Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -637,17 +535,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -663,21 +561,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -699,18 +597,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -722,7 +620,7 @@
 - id: Most Kindest Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -739,17 +637,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -765,21 +663,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -801,18 +699,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -824,7 +722,7 @@
 - id: Fastest Speaker Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -841,17 +739,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -867,21 +765,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -903,18 +801,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -926,7 +824,7 @@
 - id: Who Lost The Most of Their Possesions Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -943,17 +841,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -969,21 +867,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1005,18 +903,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1025,10 +923,10 @@
     - Yufei
 
 
-- id: Most Likely to Skip Work to sleep Award
+- id: Most Likely to Skip Work to Sleep Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1045,17 +943,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1071,21 +969,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1107,18 +1005,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1130,7 +1028,7 @@
 - id: Worst Lecture Attendance Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1147,17 +1045,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1173,21 +1071,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1209,18 +1107,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1232,7 +1130,7 @@
 - id: Most Likely to Go to Space Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1249,17 +1147,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1275,21 +1173,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1311,18 +1209,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1334,7 +1232,7 @@
 - id: Multiple Marriages Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1351,17 +1249,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1377,21 +1275,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1413,18 +1311,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1436,7 +1334,7 @@
 - id: Best Chef Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1453,17 +1351,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1479,21 +1377,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1515,18 +1413,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1538,7 +1436,7 @@
 - id: Worst Chef Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1555,17 +1453,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1581,21 +1479,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1617,18 +1515,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1640,7 +1538,7 @@
 - id: Who Won't Shut Up Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1657,17 +1555,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1683,21 +1581,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1719,18 +1617,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1742,7 +1640,7 @@
 - id: Biggest Sigma Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1759,17 +1657,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1785,21 +1683,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1821,18 +1719,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1844,7 +1742,7 @@
 - id: Funniest Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1861,17 +1759,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1887,21 +1785,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -1923,18 +1821,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -1946,7 +1844,7 @@
 - id: Highest Aura Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -1963,17 +1861,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -1989,21 +1887,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2025,18 +1923,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -2048,7 +1946,7 @@
 - id: Who Will Have Children First Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -2065,17 +1963,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -2091,21 +1989,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2127,18 +2025,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -2150,7 +2048,7 @@
 - id: Who Will Win a Novel Prize Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -2167,17 +2065,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -2193,21 +2091,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2229,18 +2127,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -2252,7 +2150,7 @@
 - id: Who Will Have The Most Children Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -2269,17 +2167,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -2295,21 +2193,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2331,18 +2229,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -2354,7 +2252,7 @@
 - id: Best Jawline Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -2371,17 +2269,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -2397,21 +2295,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2433,18 +2331,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -2456,7 +2354,7 @@
 - id: Life of the Party Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -2473,17 +2371,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -2499,21 +2397,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2535,18 +2433,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -2555,10 +2453,10 @@
     - Yufei
 
 
-- id: Most Likely To Get Id'd When They're 30 Award
+- id: Looks The Youngest Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -2575,17 +2473,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -2601,21 +2499,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2637,18 +2535,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -2660,7 +2558,7 @@
 - id: Best Dancer Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -2677,17 +2575,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -2703,21 +2601,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2739,18 +2637,18 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
@@ -2762,7 +2660,7 @@
 - id: Best Moustache Award
   t: check
   o:
-    - Abigail
+    - Abigail (Abby)
     - Alberto
     - Albina
     - Alexander
@@ -2779,17 +2677,17 @@
     - Berna
     - Bowen
     - Catherine
-    - Clara Garcia 
-    - Clara Sondermann
+    - Clara (Spanish) 
+    - Clara (German)
     - Dabin
     - Daliborka
-    - Danial 
-    - Daniel Sahlberg
-    - Daniel Nogueira
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
     - Daria
     - Daryna
-    - Elena
-    - Eleni
+    - Elena (Spanish)
+    - Elena (Greek)
     - Emanuele
     - Eunjin
     - Filip
@@ -2805,21 +2703,21 @@
     - Joanne
     - João
     - Joel
-    - Joel
-    - Johan
-    - Jonas
-    - Jonas Mussal
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
     - Juan
     - Karla
     - Kateryna
     - Konrad
     - Koray
     - Lina
-    - Lucas
+    - Lucas (German)
     - Lukas
     - Maike
-    - Marco
-    - Marcos
+    - Marco (Italian)
+    - Marcos (Spanish)
     - Marta
     - Martina
     - Matteo Durando
@@ -2841,18 +2739,940 @@
     - Sarawit
     - Sebastián
     - Siemen
-    - Simon
-    - Simone
+    - Simon (German)
+    - Simone (Italian)
     - Sophia
     - Thirathep
     - Tianchi
     - Tom
     - Valeriia
-    - Veronika
+    - Veronika (Ukrainian)
     - Viktoriia
     - Violeta
     - Wandile
-    - Weronika
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+- id: Best Haircut Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+
+- id: Best Runner Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+
+- id: Best Hairdresser Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+
+- id: Most Likely to Became a Millionaire Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+
+- id: Best Drunk Person Award
+  t: check
+  o: 
+    - Pranav
+
+- id: I Have a Crush on Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+
+- id: Best Gossipers Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+
+- id: Speaks The Loudest Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+
+- id: Best Singer Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
+    - Witold
+    - Yannick
+    - Yeirys
+    - Yifeng
+    - Yiwei
+    - Yufei
+
+
+- id: Biggest Coffe Adict Award
+  t: check
+  o:
+    - Abigail (Abby)
+    - Alberto
+    - Albina
+    - Alexander
+    - Alexandra
+    - Amina
+    - Anastasiia
+    - Andrea
+    - Anke
+    - Anton
+    - Arzoo
+    - Aurora
+    - Bartłomiej (Bartek)
+    - Benjamin
+    - Berna
+    - Bowen
+    - Catherine
+    - Clara (Spanish) 
+    - Clara (German)
+    - Dabin
+    - Daliborka
+    - Danial (Iranian) 
+    - Daniel (Swedish)
+    - Daniel (Brasilian)
+    - Daria
+    - Daryna
+    - Elena (Spanish)
+    - Elena (Greek)
+    - Emanuele
+    - Eunjin
+    - Filip
+    - Giovanni
+    - Hanyi
+    - Hayden
+    - Iliana
+    - Isaac
+    - Isabel
+    - Ivan
+    - Javier
+    - Jernej
+    - Joanne
+    - João
+    - Joel
+    - Joel (Spanish)
+    - Johan (Swedish)
+    - Jonas (German)
+    - Jonas (Thank you for the tshirt)
+    - Juan
+    - Karla
+    - Kateryna
+    - Konrad
+    - Koray
+    - Lina
+    - Lucas (German)
+    - Lukas (Spanish)
+    - Maike
+    - Marco (Italian)
+    - Marcos (Spanish)
+    - Marta
+    - Martina
+    - Matteo Durando
+    - Matteo Spaziani
+    - Max
+    - Minsu
+    - Miriam
+    - Monami
+    - Nengyuan
+    - Oleksandr 
+    - Oleksandra
+    - Ono
+    - Peter
+    - Pranav
+    - Raeyoung
+    - Riccardo
+    - Rohan 
+    - Ronan (Irish)
+    - Sarawit
+    - Sebastián
+    - Siemen
+    - Simon (German)
+    - Simone (Italian)
+    - Sophia
+    - Thirathep
+    - Tianchi
+    - Tom
+    - Valeriia
+    - Veronika (Ukrainian)
+    - Viktoriia
+    - Violeta
+    - Wandile
+    - Weronika (Polish)
     - Witold
     - Yannick
     - Yeirys
