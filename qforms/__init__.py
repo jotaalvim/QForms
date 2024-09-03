@@ -96,11 +96,12 @@ def login():
 @app.route('/quest',methods = ['GET','POST'])
 def quest():
     if request.method == 'GET':
-        #return list2form(conf)
+        page = list2form(conf)
+        return page
 
-        test_form = {"nome!": "joao afonsoa alvim oliveida dias de almeida", "sexo": "masculino", "animais preferidos":
-                ["gato","vaca"], "cor preferida":"vermelho"}
-        return list2formFilled(conf, test_form)
+    #test_form = {"nome!": "joao afonsoa alvim oliveida dias de almeida", "sexo": "masculino", "animais preferidos":
+         #       ["gato","vaca"], "cor preferida":"vermelho"}
+        #return list2formFilled(conf, test_form)
 
     if request.method == 'POST':
         form2file(conf, request.form, request.files)
@@ -131,7 +132,46 @@ def key2form(yc:list)->str:
 def list2form(l:list)->str:
     title,*l2 = l
     h = '<!DOCTYPE html>\n'
-    h += f"<h1>{title}</h1>\n<form method='post' enctype='multipart/form-data'> <ul>"
+    
+    
+    h += """<head> 
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 100%;
+            justify-content: center;
+        }
+
+        .checkbox-container input[type='checkbox'] {
+            margin-right: 1px; /* Adds space between the checkbox and the text */
+        }
+
+        .checkbox-container div {
+            flex: 0 1 100px; /* Adjusts the width of each checkbox block */
+            margin: 1px;
+        }
+
+</style>
+            </head>"""
+
+
+    h += f"<h1>{title}</h1>\n"
+
+    h += "<form method='post' enctype='multipart/form-data'> <ul>"
+
     fim = "<input type=submit value='done'/> </ul></form>"
 
     for dic in l2:
@@ -146,13 +186,17 @@ def list2form(l:list)->str:
             h += f"<li> {id}: <input type='text' name='{id}' {req} /> </li> <p>{d}</p>\n"
         if t == 'radio': # selects on of diferent buttons 
             h += f'<li>{id}: <br/>'
+            h += '<div class="checkbox-container">'
             for elem in op:
-                h += f"<input type='radio' name='{id}' value='{elem}' {req} >  {elem}</input> <br/>"
+                h += f"<div><input type='radio' name='{id}' value='{elem}' {req} > {elem}</input> </div><br/>\n"
+            h += '</div>'
             h += f'</li>  <p>{d}</p>\n'
         if t == 'check':# checkbox buttons
             h += f'<li>{id}: <br/>'
+            h += '<div class="checkbox-container">'
             for elem in op:
-                h += f"<input type='checkbox' name='{id}' value='{elem}' >  {elem}</input> <br/>"
+                h += f"<div><input type='checkbox' name='{id}' value='{elem}' >  {elem}</input></div> <br/> \n"
+            h += '</div>'
             h += f'</li> <p>{d}</p>\n'
         # submit files
         if t == 'file':
@@ -201,7 +245,7 @@ def form2file(yc:list,rfo:dict,rfi:dict)->str:
             f = open(pathjson, "x")
             f.close()
             f = open(pathjson,'a')
-            f.write(f'{{"title":"{title}"}}')
+            f.write(f'{{"title":"{title}"}}\n')
             f.close()
         f = open(pathjson ,'a')
         f.write(json.dumps(fdict)+'\n')
