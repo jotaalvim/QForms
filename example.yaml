@@ -1,0 +1,31 @@
+- Favorite Animal Form
+
+- id: name!
+  t:  str                                  ## type
+  h: write first and last name here       ## help (optional)
+  req: True
+
+- id: gender
+  t:  radio
+  o:                                           ## available options
+     - masculine
+     - feminine
+  req: False                 # when dalse dont need to include
+
+
+- id: favourite animal
+  t: check
+  o: 
+     - cat
+     - cow
+     - dog
+     - crocodile
+     - guinea pig
+     - zebra
+  h: Select the animal/s you like the most!
+
+- id: Upload file
+  t: file
+  h: upload a photo of the animal  #   
+  req: True
+

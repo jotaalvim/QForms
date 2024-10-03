@@ -3,7 +3,7 @@ Qforms: google-forms like local form generator tool
 """
 
 from flask import Flask, render_template, request
-#from flask_ngrok import run_with_ngrok
+from flask_ngrok import run_with_ngrok
 import sys, os, yaml, json, jjcli, waitress
 import hashlib, shelve, datetime
 
@@ -72,15 +72,15 @@ def main():
 
 
     if "-d" in c.opt:
+        print(f'[host] {c.opt["-d"]}:8080/quest')
         waitress.serve(app, host=c.opt["-d"], port=8080)
     else:
+        print(f'[host] localhost:8080/quest')
         waitress.serve(app, host="localhost", port=8080)
     #app.run()
 
-
-
-#if '-n' in c.opt:
-#    run_with_ngrok(app)
+    if '-n' in c.opt:
+        run_with_ngrok(app)
 
 
 @app.route('/login',methods = ['GET','POST'])
@@ -105,6 +105,7 @@ def quest():
 
     if request.method == 'POST':
         form2file(conf, request.form, request.files)
+        print("CHEGO AQUI")
         upload_file(request.files)
         return mostra_request(conf, request.form, 
                 request.files)
@@ -181,26 +182,32 @@ body {
         d  = dic.get('h','') # description, helper
         r  = dic.get('req',False) # required
         req = 'required' if r else ''
+        redstar = '<span style="color: red;">*</span>' if r else ''
 
         if t == 'str':
-            h += f"<li> {id}: <input type='text' name='{id}' {req} /> </li> <p>{d}</p>\n"
+            h += f"<li> {id} {redstar}: <input type='text' name='{id}' {req} /> </li> <p>{d}</p>\n"
         if t == 'radio': # selects on of diferent buttons 
-            h += f'<li>{id}: <br/>'
+            h += f'<li>{id} {redstar}: <br/>'
+            h += f'<p>{d}</p>'
             h += '<div class="checkbox-container">'
             for elem in op:
-                h += f"<div><input type='radio' name='{id}' value='{elem}' {req} > {elem}</input> </div><br/>\n"
+                h += f"<div><input type='radio' name='{id}' value='{elem}' > {elem}</input> </div><br/>\n"
             h += '</div>'
-            h += f'</li>  <p>{d}</p>\n'
+            h += f'</li> \n'
+
         if t == 'check':# checkbox buttons
-            h += f'<li>{id}: <br/>'
+            h += f'<li>{id}{redstar}: <br/>'
+            h += f'<p>{d}</p>\n'
+
             h += '<div class="checkbox-container">'
             for elem in op:
-                h += f"<div><input type='checkbox' name='{id}' value='{elem}' >  {elem}</input></div> <br/> \n"
-            h += '</div>'
-            h += f'</li> <p>{d}</p>\n'
+                h += f"<div><input type='checkbox' name='{id}' value='{elem}' >  {elem} </input></div> <br/> \n"
+            h += '</div></li> '
         # submit files
         if t == 'file':
-            h += f"<input type='file' name ='{id}' multiple>\n"	
+            h += f'<li>{id}{redstar}: <br/>'
+            h += f'</li> <p>{d}</p>\n'
+            h += f"<input type='file' name ='{id}' multiple {req} > \n"
     return h + fim
 
     
@@ -379,25 +386,29 @@ def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
     #yc  → yaml configuration
     #rfo → request.forms
     #rfi → request.files
+    #lo  → list of option filled by user
     title,*l = yc
     acc = {}
     for dic in l:
         lo = []
-        id = dic['id']
+        ident = dic['id']
+
         if dic['t'] == 'file':
-            f = rfi[id]
+            f = rfi[ident]
             lo += os.path.join(app.config['UPLOAD_FOLDER'],f.filename)
             lo = ''.join(lo)
+        else:
+            lo = rfo.getlist(ident)
 
-        else:
-            lo = rfo.getlist(id)
         if len(lo) == 1:
-            acc[id] = lo[0]
+            acc[ident] = lo[0]
         else:
-            acc[id] = lo
+            acc[ident] = lo
+
 
         acc['date'] = date()
         acc['ip'] = request.remote_addr
+        print(acc)
     return acc
 
 
@@ -411,9 +422,9 @@ def listId(yc:list)->list:
 
 def getkey(yc:list)->str:
     li = listId(yc)
-    for id in li:
-        if '!' in id:
-            return sub(r'!','',id) #find replace
+    for ident in li:
+        if '!' in ident:
+            return sub(r'!','',ident) #find replace
     return None
 
 def date()->str:
