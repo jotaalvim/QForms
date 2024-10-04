@@ -1,16 +1,19 @@
-## Name
+## QForms
 
-qforms is a quick local google-forms-like generator tool. 
+
+## QForms
+
+Quick Forms, `qforms`, is a local tool for generating forms similar to Google Forms. It allows you to quickly create personal or custom forms **without relying on proprietary third-party services**, offering a simple and flexible solution for form generation and data collection. Perfect for those who value privacy and control over their data.
 
 
 ## Synopsis
 
-```
-qforms conf.yaml   -- starts a server
-qforms -h          -- show this help                     (FIXME(not yet))
-qforms -c          -- shown a configurarion file example (FIXME(not yet))
-```
+To start the server do:
 
+```
+qforms [options] [config.yaml]
+
+```
 
 ### Options
 -j : export to json
@@ -27,20 +30,21 @@ qforms -c          -- shown a configurarion file example (FIXME(not yet))
 A valid YAML file with the following struture:
 
 ```
-- title
+- title              # first line of config
 
 - id: <name>
   t: <field>
-  o:
+  o:                 # Optional - List of options
     - <option1>
     - <option2>
 
-  h: <description>   # Optional
-  req: <True|False>  # Optional
+  h: <description>   # Optional - Helper, description
+  r: <bool>          # Optional - Required, force user to fill this element
 ```
 
 You can have 4 different types of fields that represent a
 different html elemment 
+
 ```
 str   -> text box
 file  -> file input
@@ -60,16 +64,16 @@ Here’s an example of a valid YAML configuration file for `qforms`:
 - Favorite Animal Form
 
 - id: name!
-  t:  str                                  # type
-  h:  write first and last name here        # help (optional)
+  t:  str
+  h:  write first and last name here
   req: True
   
 - id: gender
   t:  radio
-  o:                                        # available options
+  o:
     - masculine
     - feminine
-  req: False                                # when False, it's optional
+  req: False
 
 - id: favourite animal
   t: check
@@ -84,10 +88,24 @@ Here’s an example of a valid YAML configuration file for `qforms`:
 
 - id: Upload file
   t: file
-  h: upload a photo of the animal            # help
-  req: True
+  h: upload a photo of the animal
+  r: True
 ```
 
 ### Output Created
 
 Upon form submission, a JSON file (`conf_out.json`) is generated with the responses collected from the form. The structure of the output will reflect the field IDs and their respective user inputs.
+
+
+
+
+
+## Dependencies 
+
+FIXME 
+
+Make sure you have [jjcli](https://pypi.org/project/jjcli) module instaled, you can install it by:
+```
+pip install jjcli
+```
+waitress

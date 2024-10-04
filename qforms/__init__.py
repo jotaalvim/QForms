@@ -28,17 +28,17 @@ def main():
     """
 
     global c,conf, fconf
-    c = jjcli.clfilter(opt="sd:cjh",doc=main.__doc__)
+    c = jjcli.clfilter(opt="snd:cjh",doc=main.__doc__)
 
     if '-s' in c.opt :
         print(
         """
-        FIXME
+        FIXME oque é isto?
         """)
 
     if '-h' in c.opt:
         print(
-        """Usage: qforms [options] config.yaml   
+        """Usage: qforms [options] [config.yaml]
         Options: 
             -j : export to <title>.json
             -c : export to <title>.csv
@@ -71,16 +71,17 @@ def main():
     app.config['TITLE'] = None
 
 
-    if "-d" in c.opt:
+    if '-n' in c.opt:
+        run_with_ngrok(app)
+        app.run()
+
+    elif '-d' in c.opt:
         print(f'[host] {c.opt["-d"]}:8080/quest')
         waitress.serve(app, host=c.opt["-d"], port=8080)
     else:
         print(f'[host] localhost:8080/quest')
         waitress.serve(app, host="localhost", port=8080)
-    #app.run()
 
-    if '-n' in c.opt:
-        run_with_ngrok(app)
 
 
 @app.route('/login',methods = ['GET','POST'])
@@ -105,7 +106,6 @@ def quest():
 
     if request.method == 'POST':
         form2file(conf, request.form, request.files)
-        print("CHEGO AQUI")
         upload_file(request.files)
         return mostra_request(conf, request.form, 
                 request.files)
@@ -180,7 +180,7 @@ body {
         t  = dic.get('t','str') # types
         op = dic.get('o') # options
         d  = dic.get('h','') # description, helper
-        r  = dic.get('req',False) # required
+        r  = dic.get('r',False) # required
         req = 'required' if r else ''
         redstar = '<span style="color: red;">*</span>' if r else ''
 
@@ -254,23 +254,22 @@ def form2file(yc:list,rfo:dict,rfi:dict)->str:
             f = open(pathjson,'a')
             f.write(f'{{"title":"{title}"}}\n')
             f.close()
-        f = open(pathjson ,'a')
+        f = open(pathjson ,'a') # append mode
         f.write(json.dumps(fdict)+'\n')
         f.close()
 
-    s = shelve.open( os.path.join(path, name+'.db'))
-
+    #s = shelve.open( os.path.join(path, name+'.db'))
     #função que busca a chave
     #FIXME
-    chave = 'nome'
-    if chave in s:
-        value = s[chave]
-        value.append( fdict )
-        s[chave] = value
-    else:
-        s[chave] = [fdict]
-    
-    s.close()
+    #chave = 'nome'
+    #if chave in s:
+    #    value = s[chave]
+    #    value.append( fdict )
+    #    s[chave] = value
+    #else:
+    #    s[chave] = [fdict]
+    #
+    #s.close()
 
 def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
     'recieved html for the POST method'
@@ -454,7 +453,7 @@ def list2formFilled(l:list, form:dict)->str:
         t  = dic.get('t','str') # types
         op = dic.get('o') # options
         d  = dic.get('h','') # description, helper
-        r  = dic.get('req',False) # required
+        r  = dic.get('r',False) # required
         req = 'required' if r else ''
 
         if t == 'str':

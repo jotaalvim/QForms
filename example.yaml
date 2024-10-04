@@ -1,16 +1,16 @@
 - Favorite Animal Form
 
 - id: name!
-  t:  str                                  ## type
-  h: write first and last name here       ## help (optional)
-  req: True
+  t:  str
+  h: write first and last name here
+  r: True
 
 - id: gender
   t:  radio
-  o:                                           ## available options
+  o: 
      - masculine
      - feminine
-  req: False                 # when dalse dont need to include
+  r: False 
 
 
 - id: favourite animal
@@ -26,6 +26,6 @@
 
 - id: Upload file
   t: file
-  h: upload a photo of the animal  #   
-  req: True
+  h: upload a photo of the animal 
+  r: True
 
