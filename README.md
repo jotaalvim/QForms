@@ -17,7 +17,7 @@ qforms [options] [config.yaml]
 * -h : this help
 * -c : export to csv
 * -d <domain> : server host = domain (def: localhost) 
-* -s <path>: allow user to load their own css file
+* -s <path>: allow user to load their own css style
 
 
 ## Description
@@ -90,16 +90,14 @@ Here’s an example of a valid YAML configuration file for `qforms`:
 From the `example.yaml` config the following structure is created:
 ```
 example_uploads/
-├── example.csv
 ├── example.json
 └── example_submitted_files
 ```
 
+Upon a form submission, a `.json` file is generated with the responses collected from the form. If the option for csv is enable then also a `.csv` is created and updated every time a form is submitted.
 
-Upon a form submission, a JSON file is generated with the responses collected from the form. 
-
-
-
+The `example_submitted_files` folder is the files submitted destination. A
+unique name is given to avoid conflits.
 
 
 ## Dependencies 
@@ -107,7 +105,13 @@ Upon a form submission, a JSON file is generated with the responses collected fr
 FIXME 
 
 Make sure you have [jjcli](https://pypi.org/project/jjcli) module instaled, you can install it by:
-```
-pip install jjcli
-```
-waitress
+
+
+dependencies = [
+    "flask_ngrok",
+    "flask",
+    "waitress",
+    "pyyaml",
+    "jjcli"
+]
+
