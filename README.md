@@ -1,5 +1,3 @@
-## QForms
-
 
 ## QForms
 
@@ -12,15 +10,14 @@ To start the server do:
 
 ```
 qforms [options] [config.yaml]
-
 ```
 
 ### Options
--j : export to json
--c : export to csv
--d <domain> : server host = domain (def: localhost) 
--h : this help
 
+* -h : this help
+* -c : export to csv
+* -d <domain> : server host = domain (def: localhost) 
+* -s <path>: allow user to load their own css file
 
 
 ## Description
@@ -42,19 +39,15 @@ A valid YAML file with the following struture:
   r: <bool>          # Optional - Required, force user to fill this element
 ```
 
-You can have 4 different types of fields that represent a
+You can have 4 different types of `field` that represent a
 different html elemment 
 
 ```
-str   -> text box
-file  -> file input
-radio -> radio checkbox  (selection of 1 box  allowed)
-check -> normal checkbox (selection of n boxes allowed)
+str   : text box
+file  : file input
+radio : radio checkbox  (selection of 1 box  allowed)
+check : normal checkbox (selection of n boxes allowed)
 ```
-
-
-This is our standard: If a id value ends with an "!" this value is used as a key. 
-
 
 ## Example Configuration File
 
@@ -94,7 +87,16 @@ Here’s an example of a valid YAML configuration file for `qforms`:
 
 ### Output Created
 
-Upon form submission, a JSON file (`conf_out.json`) is generated with the responses collected from the form. The structure of the output will reflect the field IDs and their respective user inputs.
+From the `example.yaml` config the following structure is created:
+```
+example_uploads/
+├── example.csv
+├── example.json
+└── example_submitted_files
+```
+
+
+Upon a form submission, a JSON file is generated with the responses collected from the form. 
 
 
 

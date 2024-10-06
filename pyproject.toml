@@ -15,6 +15,7 @@ readme = "qforms/readme.md"
 keywords = ["forms","flask"]
 
 dependencies = [
+    "flask_ngrok",
     "flask",
     "waitress",
     "pyyaml",

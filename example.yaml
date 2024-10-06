@@ -1,6 +1,6 @@
 - Favorite Animal Form
 
-- id: name!
+- id: name
   t:  str
   h: write first and last name here
   r: True
@@ -27,5 +27,3 @@
 - id: Upload file
   t: file
   h: upload a photo of the animal 
-  r: True
-

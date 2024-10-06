@@ -7,6 +7,7 @@ from flask_ngrok import run_with_ngrok
 import sys, os, yaml, json, jjcli, waitress
 import hashlib, shelve, datetime
 
+import csv
 __version__ = "0.4"
 app = Flask(__name__)
 
@@ -20,34 +21,27 @@ def main():
 
     Usage: qforms [options] config.yaml
     Options: 
-        -j : export to <title>.json
+        -h : this help
         -c : export to <title>.csv
         -d <domain> : server host = domain (def: localhost) 
-        -h : this help
-        -s : FIXME
+        -s <path>: allow user to load their own css file
     """
 
     global c,conf, fconf
-    c = jjcli.clfilter(opt="snd:cjh",doc=main.__doc__)
-
-    if '-s' in c.opt :
-        print(
-        """
-        FIXME oque é isto?
-        """)
+    c = jjcli.clfilter(opt="s:nd:cjh",doc=main.__doc__)
 
     if '-h' in c.opt:
         print(
         """Usage: qforms [options] [config.yaml]
         Options: 
-            -j : export to <title>.json
+            -h : this help
             -c : export to <title>.csv
             -d <domain> : server host = domain (def: localhost) 
-            -h : this help
+            -s <path>: allow user to load their own css file
         """)
         sys.exit(0)
 
-    fconf = c.args[0]
+    fconf = c.args[-1]  # last argument is the yaml config
     conf = yaml.safe_load( open(fconf).read() )
     #conf = yaml.load( open(fconf).read(), Loader=yaml.FullLoader)
 
@@ -105,8 +99,11 @@ def quest():
         #return list2formFilled(conf, test_form)
 
     if request.method == 'POST':
-        form2file(conf, request.form, request.files)
-        upload_file(request.files)
+
+        list_files = upload_file(request.files)
+
+        form2file(conf, request.form, request.files, list_files)
+
         return mostra_request(conf, request.form, 
                 request.files)
 
@@ -138,36 +135,46 @@ def list2form(l:list)->str:
     h += """<head> 
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+        """
 
-.checkbox-container {
+    h += '<style>'
+
+    # Allow user to upload their ows css style
+    if '-s' in c.opt :
+        with open (c.opt['-s'], 'r') as f:
+            content = f.read()
+            h += content
+
+    else:
+        h += """
+        body {      
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .checkbox-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             max-width: 100%;
             justify-content: center;
         }
-
+        
         .checkbox-container input[type='checkbox'] {
             margin-right: 1px; /* Adds space between the checkbox and the text */
         }
-
+        
         .checkbox-container div {
             flex: 0 1 100px; /* Adjusts the width of each checkbox block */
             margin: 1px;
         }
+"""
 
-</style>
-            </head>"""
-
+    h += '</style> </head>'
 
     h += f"<h1>{title}</h1>\n"
 
@@ -211,7 +218,7 @@ body {
     return h + fim
 
     
-def form2file(yc:list,rfo:dict,rfi:dict)->str:
+def form2file(yc:list,rfo:dict,rfi:dict, list_files)->str:
     'takes a form and a list os dicts(from yaml) and stores it in json, csv files'
     global fconf
     #fconf path to yaml
@@ -219,20 +226,20 @@ def form2file(yc:list,rfo:dict,rfi:dict)->str:
     #rfo → request.forms
     #rfi → request.files
     
-    fdict = forms2dict(yc,rfo,rfi)
+    fdict = forms2dict(yc,rfo,rfi, list_files)
 
     title,*l = yc
 
     name = getName(fconf)
     path = app.config['UPLOAD_FOLDER']
+    pathcsv = os.path.join(path, name+'.csv')
+
+
 
     lId = listId(yc) # list of dentifiers 
 
     # saving to csv
     if '-c' in c.opt:
-        fcsv  = forms2csv (yc,rfo,rfi)
-        pathcsv = os.path.join(path, name+'.csv')
-
         if not os.path.exists(pathcsv):
             f = open(pathcsv, "x")
             f.close()
@@ -241,22 +248,33 @@ def form2file(yc:list,rfo:dict,rfi:dict)->str:
             f.write(','.join(lId)+'\n')
             f.close()
 
-        f = open(pathcsv,'a')
-        f.write(fcsv+'\n')
-        f.close()
+        fcsv  = forms2csv (yc,rfo,rfi,list_files)
+
+        with open(pathcsv,'a') as f:
+            f.write(fcsv+'\n')
 
     # saving to json
-    if '-j' in c.opt:
-        pathjson = os.path.join(path,name+'.json')
-        if not os.path.exists(pathjson):
-            f = open(pathjson, "x")
-            f.close()
-            f = open(pathjson,'a')
-            f.write(f'{{"title":"{title}"}}\n')
-            f.close()
-        f = open(pathjson ,'a') # append mode
-        f.write(json.dumps(fdict)+'\n')
+    pathjson = os.path.join(path,name+'.json')
+
+    if not os.path.exists(pathjson):
+        f = open(pathjson, "x")
         f.close()
+        f = open(pathjson,'a')
+        f.write('{ "title":  "'+ title+'", "questions" : [] , "forms" : []}')
+        f.close()
+
+    with open(pathjson, 'r') as json_file:
+        data = json.load(json_file)
+        data['questions'] = list(set(data['questions']).union(set(lId)))  # perserve old identifiers in case we delete something
+        data['forms'].append(fdict) 
+        #print(data)
+
+    with open(pathjson, 'w') as json_file:
+        json.dump(data, json_file, indent=4) 
+
+    #f = open(pathjson ,'a') # append mode
+    #f.write(json.dumps(fdict)+'\n')
+    #f.close()
 
     #s = shelve.open( os.path.join(path, name+'.db'))
     #função que busca a chave
@@ -304,38 +322,47 @@ def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
     return h + fim
 
 
-def upload_file(d:dict):
+def upload_file(d):
     # d is a multidict(request.files)
+    list_files = []
     for key in d:
-        if d[key]: #d[key] != "" houve submissao de ficheiro
-            f = d[key] #name
-            c = f.read()
-             
-            oldname = f.filename
-            l = oldname.split(sep='.')
-            if len(l) > 1:
-                ext = '.'+l[-1]
-            else:
-                ext = ''
+        uploaded_files = d.getlist(key)
 
-            # calculating the file md5 
-            newname = hashlib.md5(c).hexdigest()
+        # f is a FileStorage object
+        # https://tedboy.github.io/flask/generated/generated/werkzeug.FileStorage.html
+        for f in uploaded_files:
+            #print(f.content_type, f.mimetype, f.content_length)
+            if f.filename != '':
 
-            idnt = key
-            #adding extension and identification
-            finalname = idnt + newname + ext
+                c = f.read()
 
-            name = getName(fconf)
-            path = app.config['UPLOAD_FOLDER']
+                # calculating the file md5 
+                newname = hashlib.md5(c).hexdigest()
+                 
+                oldname = f.filename
+                l = oldname.split(sep='.')
+                if len(l) > 1:
+                    ext = '.'+l[-1]
+                else:
+                    ext = ''
 
-            f = open(os.path.join(path, name+"_submitted_files",finalname),'wb')
-            f.write(c)
-            f.close()
+                #adding extension and identification
+                finalname = key + "-" + ".".join(l[:-1]) + "-" + newname + ext
 
-            #f.save(os.path.join(app.config['UPLOAD_FOLDER'], newname)) 
+                list_files.append((key,finalname))
+
+                name = getName(fconf)
+                path = app.config['UPLOAD_FOLDER']
+
+                file = open(os.path.join(path, name+"_submitted_files",finalname),'wb')
+                file.write(c)
+                file.close()
+
+                #f.save(os.path.join(app.config['UPLOAD_FOLDER'], newname)) 
+    return list_files
 
 
-def forms2csv(yc:list,rfo:dict,rfi:dict)->str:
+def forms2csv(yc:list,rfo:dict,rfi:dict,list_files)->str:
     'forms(multidict) to coma separated values'
     # l yaml conf
     #rfo → request.forms
@@ -345,15 +372,15 @@ def forms2csv(yc:list,rfo:dict,rfi:dict)->str:
     acc = []
     for dic in l:
         lo = []
-        id = dic['id']
+        ident = dic['id']
+
         if dic['t'] == 'file':
-            f = rfi[id]
-            if f.filename == None:
-                lo = []
-            else:
-                lo = [ os.path.join(app.config['UPLOAD_FOLDER'],f.filename) ]
+            filtered_by_ident = [ n for i,n in filter_by_fst(ident, list_files)] 
+            list_paths = [ os.path.join(app.config['UPLOAD_FOLDER'], x) for x in filtered_by_ident ]
+
+            lo = list_paths
         else:
-            lo = rfo.getlist(id)
+            lo = rfo.getlist(ident)
 
         acc.append(csv(', '.join(lo)))
 
@@ -380,12 +407,14 @@ def csv (word:str)->str:
     return wordcsv
 
 
-def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
+def forms2dict(yc:list,rfo:dict,rfi:dict,list_files)->dict:
     'convert a form (multidict) to a normal dict'
     #yc  → yaml configuration
     #rfo → request.forms
     #rfi → request.files
     #lo  → list of option filled by user
+    #list_files → list of new files names
+
     title,*l = yc
     acc = {}
     for dic in l:
@@ -393,21 +422,20 @@ def forms2dict(yc:list,rfo:dict,rfi:dict)->dict:
         ident = dic['id']
 
         if dic['t'] == 'file':
-            f = rfi[ident]
-            lo += os.path.join(app.config['UPLOAD_FOLDER'],f.filename)
-            lo = ''.join(lo)
+
+            filtered_by_ident = [ n for i,n in filter_by_fst(ident, list_files)]
+
+            list_paths = [ os.path.join(app.config['UPLOAD_FOLDER'], x) for x in filtered_by_ident ]
+            #print(filtered_by_ident)
+            #print(list_paths)
+            lo = list_paths
         else:
             lo = rfo.getlist(ident)
 
-        if len(lo) == 1:
-            acc[ident] = lo[0]
-        else:
-            acc[ident] = lo
-
+        acc[ident] = lo[0] if len(lo) == 1 else lo
 
         acc['date'] = date()
         acc['ip'] = request.remote_addr
-        print(acc)
     return acc
 
 
@@ -430,6 +458,10 @@ def date()->str:
     'get the date and time'
     now = datetime.datetime.now()
     return now.strftime("%d/%m/%Y %H:%M:%S")
+
+def filter_by_fst( pattern , list_t ):
+    return list( filter ( lambda x: x[0] == pattern, list_t) )
+
 
 
 
