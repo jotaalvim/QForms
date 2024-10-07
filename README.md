@@ -30,17 +30,17 @@ A valid YAML file with the following struture:
 - title              # first line of config
 
 - id: <name>
-  t: <field>
-  o:                 # Optional - List of options
+  t: <field>         # Type - indicates the html element 
+  o:                 # Options - List of options 
     - <option1>
     - <option2>
 
-  h: <description>   # Optional - Helper, description
-  r: <bool>          # Optional - Required, force user to fill this element
+  h: <description>   # Helper - provide a description
+  r: <bool>          # Required - force user to fill this element
 ```
 
-You can have 4 different types of `field` that represent a
-different html elemment 
+You can have 4 different types of fields that represent a
+different html elemment.
 
 ```
 str   : text box
@@ -48,6 +48,9 @@ file  : file input
 radio : radio checkbox  (selection of 1 box  allowed)
 check : normal checkbox (selection of n boxes allowed)
 ```
+
+Most settings are optional. For instance, the form creator doesn’t need to provide a helper description or specify whether a field is required. Providing a list of options only makes sense for `radio` or `check`box types. If no type is specified for an HTML element, a text box will be used as the default.
+
 
 ## Example Configuration File
 
@@ -57,7 +60,9 @@ Here’s an example of a valid YAML configuration file for `qforms`:
 - Favorite Animal Form
 
 - id: name!
-  t:  str
+  t:  str   # this line can be ommited, the text box will be used
+  as the default
+  default
   h:  write first and last name here
   req: True
   
@@ -87,18 +92,43 @@ Here’s an example of a valid YAML configuration file for `qforms`:
 
 ### Output Created
 
-From the `example.yaml` config the following structure is created:
+From the example.yaml configuration, the following structure is generated:
+
 ```
 example_uploads/
 ├── example.json
-└── example_submitted_files
+└── example_submitted_files/
 ```
 
-Upon a form submission, a `.json` file is generated with the responses collected from the form. If the option for csv is enable then also a `.csv` is created and updated every time a form is submitted.
+When the form is submitted, a `.json` file is created to store the collected responses. If CSV output is enabled, a `.csv` file is also generated and updated with each submission.
 
-The `example_submitted_files` folder is the files submitted destination. A
-unique name is given to avoid conflits.
+The example_submitted_files folder stores any uploaded files. Each file is given a unique name to avoid conflicts.
 
+
+## Another example
+
+```
+- Most Simple form
+
+- id: name
+
+- id: date
+
+- id: observations
+
+- id: Payment
+  t: radio
+  o:
+    - cash
+    - bank transfer
+  h: Do you plan to pay cash or bank tranfer
+
+- id: Payment Proof
+  t: file
+  h: If you selected bank transfer, please upload the proof of the tranfer 
+
+
+```
 
 ## Dependencies 
 

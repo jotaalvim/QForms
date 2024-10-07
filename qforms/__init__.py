@@ -127,26 +127,11 @@ def key2form(yc:list)->str:
     #FIXME
     return 
 
-def list2form(l:list)->str:
-    title,*l2 = l
-    h = '<!DOCTYPE html>\n'
-    
-    
-    h += """<head> 
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        """
 
-    h += '<style>'
 
-    # Allow user to upload their ows css style
-    if '-s' in c.opt :
-        with open (c.opt['-s'], 'r') as f:
-            content = f.read()
-            h += content
 
-    else:
-        h += """
+
+css = """
         body {      
             display: flex;
             flex-direction: column;
@@ -172,15 +157,77 @@ def list2form(l:list)->str:
             flex: 0 1 100px; /* Adjusts the width of each checkbox block */
             margin: 1px;
         }
-"""
 
+        <!--------------------------------------------------------------->
+        #files-area{
+    	width: 30%;
+    	margin: 0 auto;
+    }
+    .file-block{
+    	border-radius: 10px;
+    	background-color: rgba(144, 163, 203, 0.2);
+    	margin: 5px;
+    	color: initial;
+    	display: inline-flex;
+    	& > span.name{
+    		padding-right: 10px;
+    		width: max-content;
+    		display: inline-flex;
+    	}
+    }
+    .file-delete{
+    	display: flex;
+    	width: 24px;
+    	color: initial;
+    	background-color: #6eb4ff00;
+    	font-size: large;
+    	justify-content: center;
+    	margin-right: 3px;
+    	cursor: pointer;
+    	&:hover{
+    		background-color: rgba(144, 163, 203, 0.2);
+    		border-radius: 10px;
+    	}
+    	& > span{
+    		transform: rotate(45deg);
+    	}
+    }
+    """
+
+
+def list2form(l:list)->str:
+    title,*l2 = l
+    h = '<!DOCTYPE html>\n'
+    
+    
+    h += """<head> 
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        """
+
+
+    h += '<style>'
+
+    # Allow user to upload their ows css style
+    if '-s' in c.opt :
+        with open (c.opt['-s'], 'r') as f:
+            content = f.read()
+            h += content
+
+    else:
+        h += css
     h += '</style> </head>'
 
+#    h += "<body>"
     h += f"<h1>{title}</h1>\n"
 
     h += "<form method='post' enctype='multipart/form-data'> <ul>"
 
-    fim = "<input type=submit value='done'/> </ul></form>"
+    fim = '</br></br><input type="submit" value="Submit Form" style="padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;" />'
+
+    #fim = "</br></br><input type=submit value='Submit Form'/> </ul></form>"
 
     for dic in l2:
         id = dic['id'] # name
@@ -188,22 +235,26 @@ def list2form(l:list)->str:
         op = dic.get('o') # options
         d  = dic.get('h','') # description, helper
         r  = dic.get('r',False) # required
-        req = 'required' if r else ''
+        req     = 'required' if r else ''
         redstar = '<span style="color: red;">*</span>' if r else ''
 
         if t == 'str':
-            h += f"<li> {id} {redstar}: <input type='text' name='{id}' {req} /> </li> <p>{d}</p>\n"
+            h += f"<li> <h3>{id}{redstar} </h3> "
+            h+= f'<p>{d}</p>\n'
+            #h+= f"<input type='text' name='{id}' {req} /> </li> "
+            h+= f'<textarea  name="{id}" rows="1" cols="50" {req} ></textarea>'
+
         if t == 'radio': # selects on of diferent buttons 
-            h += f'<li>{id} {redstar}: <br/>'
+            h += f'<li> <h3>{id}{redstar} </h3> '
             h += f'<p>{d}</p>'
             h += '<div class="checkbox-container">'
             for elem in op:
-                h += f"<div><input type='radio' name='{id}' value='{elem}' > {elem}</input> </div><br/>\n"
+                h += f"<div><input type='radio' name='{id}' value='{elem}' {req} > {elem}</input> </div><br/>\n"
             h += '</div>'
             h += f'</li> \n'
 
         if t == 'check':# checkbox buttons
-            h += f'<li>{id}{redstar}: <br/>'
+            h += f'<li> <h3>{id}{redstar} </h3>'
             h += f'<p>{d}</p>\n'
 
             h += '<div class="checkbox-container">'
@@ -212,9 +263,35 @@ def list2form(l:list)->str:
             h += '</div></li> '
         # submit files
         if t == 'file':
-            h += f'<li>{id}{redstar}: <br/>'
+            h += f'<li><h3>{id}{redstar}</h3>'
             h += f'</li> <p>{d}</p>\n'
-            h += f"<input type='file' name ='{id}' multiple {req} > \n"
+            #h += f"<input type='file' name ='{id}' multiple {req} > \n"
+
+                    # <a class="btn btn-primary text-light" role="button" aria-disabled="false">+ Add</a>
+            h += """
+            <p class="mt-5 text-center">
+                <label for="attachment">
+                    <a class="btn text-light" role="button" aria-disabled="false" style="background-color: #517891 ; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">+ Add</a>
+
+                    
+                </label>
+            """
+            h+= f' <input type="file" name="{id}" id="attachment" style="visibility: hidden; position: absolute;" multiple/>'
+                
+            h+= """
+            </p>
+            <p id="files-area">
+                <span id="filesList">
+                    <span id="files-names"></span>
+                </span>
+            </p> </li>
+            """
+    # Thing responsible for file slection and removel
+    h += """ <script> const dt = new DataTransfer(); $("#attachment").on('change', function(e){ for(var i = 0; i < this.files.length; i++){ let fileBloc = $('<span/>', {class: 'file-block'}), fileName = $('<span/>', {class: 'name', text: this.files.item(i).name}); fileBloc.append('<span class="file-delete"><span>+</span></span>') .append(fileName); $("#filesList > #files-names").append(fileBloc); }; for (let file of this.files) { dt.items.add(file); } this.files = dt.files; $('span.file-delete').click(function(){ let name = $(this).next('span.name').text(); $(this).parent().remove(); for(let i = 0; i < dt.items.length; i++){ if(name === dt.items[i].getAsFile().name){ dt.items.remove(i); continue; } } document.getElementById('attachment').files = dt.files; }); }); </script> """
+
+
+
+
     return h + fim
 
     
@@ -296,7 +373,12 @@ def mostra_request(yc:list,rfo:dict,rfi:dict)->str:
     #rfi → request.files
     title,*l = yc
     h = '<!DOCTYPE html>\n'
-    h  += f'<h1> Received : {title} </h1> <h4> {date()}</h4><ul>'
+    h += "<style>" + css + "</style>"
+    h  += f'<h1> Received : {title} </h1>'
+
+    h += '<h1 style="padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;" > ✓ </h1>'
+
+    h += f'<h4> {date()}</h4><ul>'
     fim = '</ul>'
 
     for dic in l:
@@ -374,7 +456,7 @@ def forms2csv(yc:list,rfo:dict,rfi:dict,list_files)->str:
         lo = []
         ident = dic['id']
 
-        if dic['t'] == 'file':
+        if 't' in dic and dic['t'] == 'file':
             filtered_by_ident = [ n for i,n in filter_by_fst(ident, list_files)] 
             list_paths = [ os.path.join(app.config['UPLOAD_FOLDER'], x) for x in filtered_by_ident ]
 
@@ -421,7 +503,7 @@ def forms2dict(yc:list,rfo:dict,rfi:dict,list_files)->dict:
         lo = []
         ident = dic['id']
 
-        if dic['t'] == 'file':
+        if 't' in dic and dic['t'] == 'file':
 
             filtered_by_ident = [ n for i,n in filter_by_fst(ident, list_files)]
 

@@ -1,8 +1,8 @@
 - Favorite Animal Form
 
 - id: name
-  t:  str
-  h: write first and last name here
+  #  t:  str
+  h: Write first and last name here
   r: True
 
 - id: gender
@@ -10,7 +10,7 @@
   o: 
      - masculine
      - feminine
-  r: False 
+  r: True
 
 
 - id: favourite animal
