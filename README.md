@@ -60,8 +60,7 @@ Here’s an example of a valid YAML configuration file for `qforms`:
 - Favorite Animal Form
 
 - id: name!
-  t:  str   # this line can be ommited, the text box will be used
-  as the default
+  t:  str   # this line can be ommited, the text box will be used as the default
   default
   h:  write first and last name here
   req: True
