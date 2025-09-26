@@ -7,7 +7,7 @@ build-backend = "flit_core.buildapi"
 name = "qforms"
 
 authors = [
-    {name = "Jo\u00e3o Alvim", email = "joaoafonsoalvim@gmail.com"},
+    {name = "Jo\u00e3o Alvim", email = "joaoalvim179@proton.me"},
     {name = "JJoao", email ="jj@di.uminho.pt"}] 
 
 dynamic = ["version", "description"]
@@ -15,7 +15,6 @@ readme = "qforms/readme.md"
 keywords = ["forms","flask"]
 
 dependencies = [
-    "flask_ngrok",
     "flask",
     "waitress",
     "pyyaml",
@@ -25,3 +24,7 @@ dependencies = [
 [project.scripts]
 qforms = "qforms:main"
 
+
+[project.urls]
+repository = "https://github.com/jotaalvim/qforms"
+"Bug Tracker" = "https://github.com/jotaalvim/qforms/issues"

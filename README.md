@@ -1,67 +1,123 @@
+# QForms
 
-## QForms
+**QuickForms** (`qforms`) is a local form generation tool designed as an alternative to proprietary services like Google Forms. It empowers users to maintain complete control over their data while providing a simple, command-line interface for creating forms.
 
-Quick Forms, `qforms`, is a local tool for generating forms similar to Google Forms. It allows you to quickly create personal or custom forms **without relying on proprietary third-party services**, offering a simple and flexible solution for form generation and data collection. Perfect for those who value privacy and control over their data.
+This tool comes to me as quite useful because of how simple and quick it is to make a form. One of the difficulties that appear is sharing the form’s link with other people. We recommend using ngrok so that other people can access your local machine. Ngrok used to be an embedded feature in qforms, but it stopped working for some reason and is no longer included.
 
 
-## Synopsis
+This tool is in a very early stage, so we always welcome contributions to the project!
 
-To start the server do:
+## Features
 
+- Keep your data local - no third-party services involved
+- Generate forms from simple YAML configuration files
+- Automatically creates a web form accessible via browser
+- Support for file submissions with automatic organization
+- JSON and CSV output options
+
+
+## Installation
+
+Install QForms using pip:
+
+```bash
+pip install qforms
 ```
+
+## Quick Start
+
+1. Create a YAML configuration file (see examples below)
+2. Start the server:
+
+```bash
 qforms [options] [config.yaml]
 ```
 
-### Options
+3. Open your browser and navigate to the displayed URL
+4. Fill out and submit your form
+5. View collected data in the generated output files
 
-* -h : this help
-* -c : export to csv
-* -d <domain> : server host = domain (def: localhost) 
-* -s <path>: allow user to load their own css style
+## Command Line Options
 
+| Option | Description |
+|--------|-------------|
+| `-h` | Display help message |
+| `-c` | Export submissions to CSV format |
+| `-d <domain>` | Set server host domain (default: localhost) |
+| `-s <path>` | Load custom CSS stylesheet for form styling |
 
-## Description
+## Configuration File Format
 
-### Configuration file format:
+QForms uses YAML configuration files with the following structure:
 
-A valid YAML file with the following struture:
+```yaml
+- title              # Form title (first line of config)
 
-```
-- title              # first line of config
-
-- id: <name>
-  t: <field>         # Type - indicates the html element 
-  o:                 # Options - List of options 
+- id: <field_name>   # Unique identifier for the field 
+  t: <field_type>    # Type - specifies the HTML input element  (Optinoal, textbox is the default
+  o:                 # Options - list of choices (for radio/checkbox)
     - <option1>
     - <option2>
-
-  h: <description>   # Helper - provide a description
-  r: <bool>          # Required - force user to fill this element
+  h: <description>   # Helper - descriptive text for the field  (Optional)
+  r: <boolean>       # Required - whether field must be filled  (Optional)
 ```
 
-You can have 4 different types of fields that represent a
-different html elemment.
+Helper descriptions (`h`) and required flags (`r`) are optional. If no type is specified, a text input (`str`) is used by default. Only`radio` and `check` types require the options (`o`) list
 
-```
-str   : text box
-file  : file input
-radio : radio checkbox  (selection of 1 box  allowed)
-check : normal checkbox (selection of n boxes allowed)
-```
 
-Most settings are optional. For instance, the form creator doesn’t need to provide a helper description or specify whether a field is required. Providing a list of options only makes sense for `radio` or `check`box types. If no type is specified for an HTML element, a text box will be used as the default.
+### Field Types
+
+QForms supports four field types that correspond to different HTML input elements:
+
+| Type | HTML Element | Description | Selection |
+|------|-------------|-------------|-----------|
+| `str` | Text input | Single-line text box | N/A |
+| `file` | File input | File upload field | N/A |
+| `radio` | Radio buttons | Multiple choice (single selection) | 1 option |
+| `check` | Checkboxes | Multiple choice (multiple selections) | N options |
+
 
 
 ## Example Configuration File
 
-Here’s an example of a valid YAML configuration file for `qforms`:
+Here’s an example of a valid YAML configuration file for `qforms`
+
+A minimal form for payment processing:
+
+```yaml
+- Payment Information
+
+- id: name
+  h: Full name as it appears on your ID
+  r: true
+
+- id: date
+  h: Transaction date (YYYY-MM-DD)
+  r: true
+
+- id: observations
+  h: Additional notes or comments
+
+- id: Payment Method
+  t: radio
+  o:
+    - cash
+    - bank transfer
+  h: How do you plan to pay?
+  r: true
+
+- id: Payment Proof
+  t: file
+  h: If you selected bank transfer, please upload proof of transfer
+```
+
+or a more causal form:
 
 ```yaml
 - Favorite Animal Form
 
 - id: name!
   t:  str   # this line can be ommited, the text box will be used as the default
-  default
   h:  write first and last name here
   req: True
   
@@ -83,64 +139,42 @@ Here’s an example of a valid YAML configuration file for `qforms`:
     - zebra
   h: Select the animal(s) you like the most!
 
-- id: Upload file
+- id: animal photo
   t: file
-  h: upload a photo of the animal
-  r: True
+  h: Upload a photo of your favorite animal
+  r: false
 ```
 
-### Output Created
+## Data Storage and Output
 
-From the example.yaml configuration, the following structure is generated:
+Here's an example of what running the first example looks like from the point of view of a user:
 
-```
-example_uploads/
-├── example.json
-└── example_submitted_files/
-```
+![example1](assets/form1.png)
 
-When the form is submitted, a `.json` file is created to store the collected responses. If CSV output is enabled, a `.csv` file is also generated and updated with each submission.
-
-The example_submitted_files folder stores any uploaded files. Each file is given a unique name to avoid conflicts.
+Here's the confirmation menu after submission
+![example2](assets/form2.png)
 
 
-## Another example
+### Generated File Structure
+
+When you run QForms with a configuration file, the following structure is automatically created:
 
 ```
-- Most Simple form
-
-- id: name
-
-- id: date
-
-- id: observations
-
-- id: Payment
-  t: radio
-  o:
-    - cash
-    - bank transfer
-  h: Do you plan to pay cash or bank tranfer
-
-- id: Payment Proof
-  t: file
-  h: If you selected bank transfer, please upload the proof of the tranfer 
-
-
+<config_name>_uploads/
+├── <config_name>.json      # JSON format responses
+├── <config_name>.csv       # CSV format (when -c flag is used)
+└── <config_name>_submitted_files/  # Uploaded files directory
+    ├── file1_unique_hash.ext
+    └── file2_unique_hash.ext
 ```
 
-## Dependencies 
+## Dependencies
 
-FIXME 
+QForms requires the following packages (automatically installed with pip):
+- **flask**: Web framework for serving forms
+- **waitress**: Production WSGI server
+- **pyyaml**: YAML configuration file parsing
+- **jjcli**: Command-line interface utilities
 
-Make sure you have [jjcli](https://pypi.org/project/jjcli) module instaled, you can install it by:
 
-
-dependencies = [
-    "flask_ngrok",
-    "flask",
-    "waitress",
-    "pyyaml",
-    "jjcli"
-]
 

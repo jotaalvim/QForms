@@ -1,0 +1,24 @@
+- Payment Information
+
+- id: name
+  h: Full name as it appears on your ID
+  r: true
+
+- id: date
+  h: Transaction date (YYYY-MM-DD)
+  r: true
+
+- id: observations
+  h: Additional notes or comments
+
+- id: Payment Method
+  t: radio
+  o:
+    - cash
+    - bank transfer
+  h: How do you plan to pay?
+  r: true
+
+- id: Payment Proof
+  t: file
+  h: If you selected bank transfer, please upload proof of transfer
