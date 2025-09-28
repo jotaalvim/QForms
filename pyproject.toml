@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "qforms"
-version="0.0.1"
+version="0.0.3"
 authors = [
     {name = "Jo\u00e3o Alvim", email = "joaoalvim179@proton.me"},
     {name = "JJoao", email ="jj@di.uminho.pt"}] 

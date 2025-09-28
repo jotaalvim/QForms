@@ -24,8 +24,8 @@ def main():
         -h : this help
         -c : export to <title>.csv
         -d <domain> : server host = domain (def: localhost) 
-        -s <path>: allow user to load their own css file
     """
+    # -s <path>: allow user to load their own css file
 
     global c,conf, fconf
     c = jjcli.clfilter(opt="s:nd:cjh",doc=main.__doc__)
@@ -37,8 +37,8 @@ def main():
             -h : this help
             -c : export to <title>.csv
             -d <domain> : server host = domain (def: localhost) 
-            -s <path>: allow user to load their own css file
         """)
+    # -s <path>: allow user to load their own css file
         sys.exit(0)
 
     fconf = c.args[-1]  # last argument is the yaml config
