@@ -44,7 +44,7 @@ qforms [options] [config.yaml]
 | `-h` | Display help message |
 | `-c` | Export submissions to CSV format |
 | `-d <domain>` | Set server host domain (default: localhost) |
-| `-s <path>` | Load custom CSS stylesheet for form styling |
+
 
 ## Configuration File Format
 
