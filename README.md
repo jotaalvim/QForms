@@ -12,7 +12,7 @@ This tool is in a very early stage, so we always welcome contributions to the pr
 - Keep your data local - no third-party services involved
 - Generate forms from simple YAML configuration files
 - Automatically creates a web form accessible via browser
-- Support for file submissions with automatic organization
+- Support for file submissions
 - JSON and CSV output options
 
 
@@ -149,10 +149,10 @@ or a more causal form:
 
 Here's an example of what running the first example looks like from the point of view of a user:
 
-![example1](assets/form1.png)
+![example1](https://raw.githubusercontent.com/jotaalvim/QForms/refs/heads/master/assets/form1.png?token=GHSAT0AAAAAADLLFCCTYKNXFNNJ3MKCYW6M2GZLQ5Q)
 
 Here's the confirmation menu after submission
-![example2](assets/form2.png)
+![example2](https://raw.githubusercontent.com/jotaalvim/QForms/refs/heads/master/assets/form2.png?token=GHSAT0AAAAAADLLFCCSBF6D746ZGOUZKFB42GZLQXQ)
 
 
 ### Generated File Structure

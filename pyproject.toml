@@ -1,18 +1,18 @@
 [build-system]
 requires = ["flit_core >=3.2,<4"]
+
 build-backend = "flit_core.buildapi"
 
 [project]
-
 name = "qforms"
-
+version="0.0.1"
 authors = [
     {name = "Jo\u00e3o Alvim", email = "joaoalvim179@proton.me"},
     {name = "JJoao", email ="jj@di.uminho.pt"}] 
 
-dynamic = ["version", "description"]
-readme = "qforms/readme.md"
-keywords = ["forms","flask"]
+dynamic = ["description"]
+readme = "README.md"
+keywords = ["forms","flask","privacy" ]
 
 dependencies = [
     "flask",
